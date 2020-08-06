@@ -6,6 +6,8 @@ import * as express from 'express';
 import { TransformInterceptor } from './interceptor/transform.interceptor';
 import { AllExceptionsFilter } from './filter/any-exception.filter';
 
+declare const module: any;
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
@@ -26,5 +28,9 @@ async function bootstrap() {
   // 全局异常
   app.useGlobalFilters(new AllExceptionsFilter());
   await app.listen(3000);
+  if (module.hot) {
+    module.hot.accept();
+    module.hot.dispose(() => app.close());
+  }
 }
 bootstrap();
