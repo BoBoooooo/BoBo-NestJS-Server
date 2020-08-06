@@ -1,9 +1,10 @@
-import { Users } from './users.entity';
 import { UsersService } from './users.service';
 import { Controller, Post, Body, UseGuards } from '@nestjs/common';
 import { ApiHeader } from '@nestjs/swagger';
 import { AuthService } from 'src/logical/auth/auth.service';
 import { AuthGuard } from '@nestjs/passport';
+import { Users } from 'src/entities/Users';
+
 
 @ApiHeader({
   name: 'users Module',

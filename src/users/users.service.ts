@@ -1,7 +1,7 @@
-import { Users } from './users.entity';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { Users } from 'src/entities/Users';
 
 @Injectable()
 export class UsersService {
@@ -16,7 +16,7 @@ export class UsersService {
 
   async findOne(username:string){
     return this.usersRepository.findOne({
-      username
+      userName:username
     })
   }
   async add(users:Users){

@@ -1,13 +1,12 @@
-import { UsersService } from './users/users.service';
-import { Module } from '@nestjs/common';
+import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm'; 
-import { Connection } from 'typeorm';
-import { AuthService } from './logical/auth/auth.service';
 import { AuthModule } from './logical/auth/auth.module';
 import { UsersController } from './users/users.controller';
+import { logger } from './middleware/logger.middleware';
+import { Connection } from 'typeorm';
 
 
 @Module({
@@ -19,7 +18,7 @@ import { UsersController } from './users/users.controller';
       username: 'root',
       password: 'Anshare.cc',
       database: 'sw3k_tm',
-      entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      entities: [__dirname + '/entities/*{.ts,.js}'],
       synchronize: true,
     }), 
     UsersModule, AuthModule
