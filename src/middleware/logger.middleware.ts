@@ -32,7 +32,6 @@ export class LoggerMiddleware implements NestMiddleware {
 // 函数式中间件
 export function logger(req: Request, res: Response, next: () => any) {
   const code = res.statusCode; // 响应状态码
-  console.log(res);
   next();
   // 组装日志信息
   const logFormat = ` >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -44,7 +43,6 @@ export function logger(req: Request, res: Response, next: () => any) {
     Query: ${JSON.stringify(req.query)}
     Body: ${JSON.stringify(req.body)} \n  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
   `;
-  console.log(code);
   // 根据状态码，进行日志类型区分
   if (code >= 500) {
     Logger.error(logFormat);
