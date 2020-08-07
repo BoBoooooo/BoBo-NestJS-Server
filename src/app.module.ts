@@ -5,9 +5,9 @@ import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm'; 
 import { AuthModule } from './logical/auth/auth.module';
 import { UsersController } from './users/users.controller';
-import { logger } from './middleware/logger.middleware';
 import { Connection } from 'typeorm';
-
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   imports: [
@@ -21,6 +21,9 @@ import { Connection } from 'typeorm';
       entities: [__dirname + '/entities/*{.ts,.js}'],
       synchronize: true,
     }), 
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'static'),
+    }),
     UsersModule, AuthModule
   ],
   controllers: [AppController,UsersController],
