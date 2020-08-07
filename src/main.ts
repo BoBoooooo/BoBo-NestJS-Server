@@ -5,6 +5,7 @@ import { logger } from './middleware/logger.middleware';
 import * as express from 'express';
 import { TransformInterceptor } from './interceptor/transform.interceptor';
 import { AllExceptionsFilter } from './filter/any-exception.filter';
+import * as compression from 'compression';
 
 declare const module: any;
 
@@ -27,6 +28,8 @@ async function bootstrap() {
   app.useGlobalInterceptors(new TransformInterceptor());
   // 全局异常
   app.useGlobalFilters(new AllExceptionsFilter());
+  // 开启gzip
+  app.use(compression());
   await app.listen(3000);
   if (module.hot) {
     module.hot.accept();
