@@ -33,6 +33,7 @@
     "@nestjs/swagger": "^4.5.12",
     "@nestjs/typeorm": "^7.1.0",
     "compression": "^1.7.4",
+    "helmet": "^4.0.0",
     "log4js": "^6.3.0",
     "moment": "^2.27.0",
     "mysql": "^2.18.1",
