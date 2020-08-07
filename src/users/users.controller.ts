@@ -1,10 +1,13 @@
+import { LocalAuthGuard } from './../auth/guards/local-auth.guard';
+import { AuthService } from './../auth/auth.service';
 import { UsersService } from './users.service';
 import { Controller, Post, Body, UseGuards } from '@nestjs/common';
 import { ApiHeader } from '@nestjs/swagger';
-import { AuthService } from 'src/logical/auth/auth.service';
 import { AuthGuard } from '@nestjs/passport';
 import { Users } from 'src/entities/Users';
 import { Crud, CrudController } from '@nestjsx/crud';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { NoAuth } from 'src/auth/guards/customize';
 
 @ApiHeader({
   name: 'users Module',
@@ -23,12 +26,7 @@ export class UsersController implements CrudController<Users> {
     private readonly authService: AuthService,
   ) {}
 
-  @Post('list')
-  async findAll() {
-    return await this.usersService.findAll();
-  }
-
-  // JWT验证 - Step 1: 用户请求登录
+  @NoAuth()
   @Post('login')
   async login(@Body() loginParmas: any) {
     console.log('JWT验证 - Step 1: 用户请求登录');
@@ -52,9 +50,13 @@ export class UsersController implements CrudController<Users> {
     }
   }
 
-  @UseGuards(AuthGuard('jwt')) // 使用 'JWT' 进行验证
   @Post('add')
   async add(@Body() body: any) {
     return await this.usersService.add(body);
+  }
+
+  @Post('list')
+  async findAll() {
+    return await this.usersService.findAll();
   }
 }
