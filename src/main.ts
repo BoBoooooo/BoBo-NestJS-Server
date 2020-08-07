@@ -6,12 +6,12 @@ import * as express from 'express';
 import { TransformInterceptor } from './interceptor/transform.interceptor';
 import { AllExceptionsFilter } from './filter/any-exception.filter';
 import * as compression from 'compression';
-import * as helmet from 'helmet';
+import helmet from 'helmet';
 
 declare const module: any;
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, { cors: true });
 
   const options = new DocumentBuilder()
     .setTitle('Anshare Swagger')
