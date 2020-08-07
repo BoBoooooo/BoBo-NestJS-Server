@@ -12,7 +12,9 @@ export class AuthService {
   // JWT验证 - Step 2: 校验用户信息
   async validateUser(username: string, password: string): Promise<any> {
     console.log('JWT验证 - Step 2: 校验用户信息');
-    const user = await this.usersService.findOne(username);
+    const user = await this.usersService.findOne({
+      userName:username
+    });
     if (user) {
       const userPassword = user.password;
       // 通过密码盐，加密传参，再与数据库里的比较，判断是否相等
