@@ -15,6 +15,7 @@
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
+    "pm2": "pm2 start --name nest dist/main.js",
     "db": "rm -rf src/entities & npx typeorm-model-generator -h localhost -d sw3k_tm -p 3306 -u root -x Anshare.cc -e mysql -o src/entities --noConfig true --ce pascal --cp camel",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest",
