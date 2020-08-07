@@ -1,13 +1,18 @@
-import { LocalAuthGuard } from './../auth/guards/local-auth.guard';
 import { AuthService } from './../auth/auth.service';
 import { UsersService } from './users.service';
-import { Controller, Post, Body, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  UseInterceptors,
+  UploadedFile,
+  UploadedFiles,
+} from '@nestjs/common';
 import { ApiHeader } from '@nestjs/swagger';
-import { AuthGuard } from '@nestjs/passport';
 import { Users } from 'src/entities/Users';
 import { Crud, CrudController } from '@nestjsx/crud';
-import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { NoAuth } from 'src/auth/guards/customize';
+import { FileInterceptor,FileFieldsInterceptor } from '@nestjs/platform-express';
 
 @ApiHeader({
   name: 'users Module',
@@ -58,5 +63,22 @@ export class UsersController implements CrudController<Users> {
   @Post('list')
   async findAll() {
     return await this.usersService.findAll();
+  }
+
+  @Post('upload')
+  @UseInterceptors(FileInterceptor('file'))
+  uploadFile(@UploadedFile() file) {
+    console.log(file);
+  }
+
+  @Post('uploads')
+  @UseInterceptors(
+    FileFieldsInterceptor([
+      { name: 'avatar', maxCount: 1 },
+      { name: 'background', maxCount: 1 },
+    ]),
+  )
+  uploadMultipleFile(@UploadedFiles() files) {
+    console.log(files);
   }
 }
