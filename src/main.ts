@@ -6,7 +6,9 @@ import * as express from 'express';
 import { TransformInterceptor } from './interceptor/transform.interceptor';
 import { AllExceptionsFilter } from './filter/any-exception.filter';
 import * as compression from 'compression';
+import { HttpExceptionFilter } from './filter/http-exception.filter';
 // import helmet from 'helmet';
+
 
 declare const module: any;
 
@@ -33,7 +35,8 @@ async function bootstrap() {
   app.use(compression());
   // helmet安全
   // app.use(helmet());
-
+  app.useGlobalFilters(new HttpExceptionFilter());
+  
   await app.listen(3000);
   if (module.hot) {
     module.hot.accept();
