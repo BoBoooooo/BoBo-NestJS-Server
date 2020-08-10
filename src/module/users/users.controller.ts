@@ -1,4 +1,5 @@
-import { AuthService } from './../auth/auth.service';
+import { NoAuth } from 'src/guards/customize';
+import { AuthService } from '../auth/auth.service';
 import { UsersService } from './users.service';
 import {
   Controller,
@@ -10,23 +11,16 @@ import {
 } from '@nestjs/common';
 import { ApiHeader } from '@nestjs/swagger';
 import { Users } from 'src/entities/Users';
-import { Crud, CrudController } from '@nestjsx/crud';
-import { NoAuth } from 'src/auth/guards/customize';
 import { FileInterceptor,FileFieldsInterceptor } from '@nestjs/platform-express';
+
 
 @ApiHeader({
   name: 'users Module',
   description: '用户设置',
 })
-@Crud({
-  model: {
-    type: Users,
-  },
-})
 @Controller('users')
-export class UsersController implements CrudController<Users> {
+export class UsersController {
   constructor(
-    public service: UsersService,
     private usersService: UsersService,
     private readonly authService: AuthService,
   ) {}
@@ -56,13 +50,13 @@ export class UsersController implements CrudController<Users> {
   }
 
   @Post('add')
-  async add(@Body() body: any) {
+  async add(@Body() body: Users) {
     return await this.usersService.add(body);
   }
 
   @Post('list')
   async findAll() {
-    return await this.usersService.findAll();
+    return await this.usersService.find();
   }
 
   @Post('upload')

@@ -1,6 +1,6 @@
-import { Person } from './../entities/Person';
+import { Person } from '../../entities/Person';
 import { Injectable } from '@nestjs/common';
-import { BaseService } from 'src/base/base.service';
+import { BaseService } from 'src/module/base/base.service';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 

@@ -1,17 +1,16 @@
-import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UsersModule } from './users/users.module';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { AuthModule } from './auth/auth.module';
-import { UsersController } from './users/users.controller';
+import { UsersModule } from './module/users/users.module';
+import { AuthModule } from './module/auth/auth.module';
+import { UsersController } from './module/users/users.controller';
 import { Connection } from 'typeorm';
+import { APP_GUARD } from '@nestjs/core';
+import { RoleAuthGuard } from './guards/auth-guards';
+import { PersonModule } from './module/person/person.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
-import { APP_GUARD } from '@nestjs/core';
-import { RoleAuthGuard } from './auth/guards/auth-guards';
-import { PersonModule } from './person/person.module';
-
+import { TypeOrmModule } from '@nestjs/typeorm';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
