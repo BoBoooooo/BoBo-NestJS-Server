@@ -15,7 +15,7 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
-export class BaseService<T> {
+export abstract class BaseService<T> {
   repository: Repository<T>;
   constructor(@InjectRepository(BaseEntity) repository: Repository<T>) {
     this.repository = repository;
