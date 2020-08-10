@@ -6,7 +6,7 @@ import * as express from 'express';
 import { TransformInterceptor } from './interceptor/transform.interceptor';
 import { AllExceptionsFilter } from './filter/any-exception.filter';
 import * as compression from 'compression';
-import helmet from 'helmet';
+// import helmet from 'helmet';
 
 declare const module: any;
 
@@ -32,7 +32,7 @@ async function bootstrap() {
   // 开启gzip
   app.use(compression());
   // helmet安全
-  app.use(helmet());
+  // app.use(helmet());
 
   await app.listen(3000);
   if (module.hot) {

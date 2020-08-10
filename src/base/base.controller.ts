@@ -13,27 +13,27 @@ export abstract class BaseController<T> {
 
   }
 
-  @Post()
+  @Post('list')
   public async list(@Query('page') page: number = 0, @Query('limit') limit: number = 10) {
     return this.service.find();
   }
 
-  @Post()
+  @Post('add')
   public async add(@Body() data: T) {
     return this.service.add(data);
   }
 
-  @Post()
+  @Post('update')
   public async update(@Body() data: T) {
     return this.service.add(data);
   }
 
-  @Post()
+  @Post('detail')
   public async detail(@Query() id: string) {
     return this.service.findById(id);
   }
 
-  @Post()
+  @Post('delete')
   public async delete(@Body() id: string) {
     return this.service.delete(id);
   }

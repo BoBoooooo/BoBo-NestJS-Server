@@ -10,6 +10,7 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { APP_GUARD } from '@nestjs/core';
 import { RoleAuthGuard } from './auth/guards/auth-guards';
+import { PersonModule } from './person/person.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { RoleAuthGuard } from './auth/guards/auth-guards';
     }),
     UsersModule,
     AuthModule,
+    PersonModule,
   ],
   controllers: [AppController, UsersController],
   providers: [
