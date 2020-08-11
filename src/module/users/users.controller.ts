@@ -55,8 +55,8 @@ export class UsersController {
   }
 
   @Post('list')
-  async findAll() {
-    return await this.usersService.find();
+  async findAll(@Body() body) {
+    return await this.usersService.find(body);
   }
 
   @Post('upload')

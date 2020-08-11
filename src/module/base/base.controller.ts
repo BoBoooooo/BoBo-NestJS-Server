@@ -16,8 +16,8 @@ export abstract class BaseController<T> {
   }
 
   @Post('list')
-  public async list(@Query('page') page: number = 0, @Query('limit') limit: number = 10) {
-    return  ResultGenerator.success(this.service.find());
+  public async list(@Body() body) {
+    return  ResultGenerator.success(this.service.find(body));
   }
 
   @Post('add')

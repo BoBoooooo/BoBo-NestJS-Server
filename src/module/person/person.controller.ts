@@ -1,5 +1,5 @@
 import { PersonService } from './person.service';
-import { Controller, Post } from '@nestjs/common';
+import { Controller, Post, Body } from '@nestjs/common';
 
 @Controller('person')
 export class PersonController {
@@ -7,7 +7,7 @@ export class PersonController {
   }
 
   @Post('list')
-  list(){
-    return this.service.find();
+  list(@Body() body){
+    return this.service.find(body);
   }
 }
