@@ -12,7 +12,7 @@ export interface ResultBean {
 }
 
 export class ResultGenerator {
-  static success(data: any, message:string = 'success'): ResultBean {
+  static success(data: any = {}, message:string = 'success'): ResultBean {
     const result: ResultBean = {
       code: 10,
       message,
