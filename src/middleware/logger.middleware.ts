@@ -16,7 +16,6 @@ export class LoggerMiddleware implements NestMiddleware {
     const logFormat = `Method: ${req.method} \n Request original url: ${req.originalUrl} \n IP: ${req.ip} \n Status code: ${code} \n`;
     // 根据状态码，进行日志类型区分
     if (code >= 500) {
-      console.log(logFormat);
       Logger.error(logFormat);
     } else if (code >= 400) {
       Logger.warn(logFormat);

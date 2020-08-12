@@ -5,13 +5,10 @@ import {
   Controller,
   Post,
   Body,
-  UseInterceptors,
-  UploadedFile,
-  UploadedFiles,
 } from '@nestjs/common';
 import { ApiHeader } from '@nestjs/swagger';
 import { Users } from 'src/entities/Users';
-import { FileInterceptor,FileFieldsInterceptor } from '@nestjs/platform-express';
+import { BaseController } from '../base/base.controller';
 
 
 @ApiHeader({
@@ -19,11 +16,13 @@ import { FileInterceptor,FileFieldsInterceptor } from '@nestjs/platform-express'
   description: '用户设置',
 })
 @Controller('users')
-export class UsersController {
+export class UsersController extends BaseController<Users> {
   constructor(
     private usersService: UsersService,
     private readonly authService: AuthService,
-  ) {}
+  ) {
+    super(usersService)
+  }
 
   @NoAuth()
   @Post('login')
@@ -47,32 +46,5 @@ export class UsersController {
           msg: `查无此人`,
         };
     }
-  }
-
-  @Post('add')
-  async add(@Body() body: Users) {
-    return await this.usersService.add(body);
-  }
-
-  @Post('list')
-  async findAll(@Body() body) {
-    return await this.usersService.find(body);
-  }
-
-  @Post('upload')
-  @UseInterceptors(FileInterceptor('file'))
-  uploadFile(@UploadedFile() file) {
-    console.log(file);
-  }
-
-  @Post('uploads')
-  @UseInterceptors(
-    FileFieldsInterceptor([
-      { name: 'avatar', maxCount: 1 },
-      { name: 'background', maxCount: 1 },
-    ]),
-  )
-  uploadMultipleFile(@UploadedFiles() files) {
-    console.log(files);
   }
 }

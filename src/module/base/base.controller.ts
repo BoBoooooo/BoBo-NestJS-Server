@@ -17,7 +17,7 @@ export abstract class BaseController<T> {
 
   @Post('list')
   public async list(@Body() body) {
-    return  ResultGenerator.success(this.service.find(body));
+    return  this.service.find(body);
   }
 
   @Post('add')
@@ -38,5 +38,10 @@ export abstract class BaseController<T> {
   @Post('delete')
   public async delete(@Body() id: string) {
     return ResultGenerator.success(this.service.delete(id),'删除成功');
+  }
+
+  @Post('ping')
+  public async ping(){
+    return ResultGenerator.success('ok!!!')
   }
 }

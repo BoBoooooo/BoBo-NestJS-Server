@@ -76,7 +76,7 @@ export abstract class BaseService<T> {
     // https://typeorm.io/#/find-options     ->     FindManyOptions
     const params: FindManyOptions = {
       // 缓存
-      // cache:true
+      cache:true
     };
 
     const { pageIndex, pageSize, searchCondition, orderCondition } = args;
@@ -93,10 +93,13 @@ export abstract class BaseService<T> {
       params.skip = (pageIndex - 1) * pageSize;
       params.take = pageSize;
     }
-
-    // 拼接高级查询条件
-    this.getSearchCondition(searchCondition, params);
+    if(Array.isArray(searchCondition) && searchCondition.length>0){
+      // 拼接高级查询条件
+      this.getSearchCondition(searchCondition, params);
+    }
+    
     const [list, total] = await this.repository.findAndCount(params);
+
     return ResultGenerator.success({
       list,
       total,

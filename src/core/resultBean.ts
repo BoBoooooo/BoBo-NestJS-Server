@@ -5,6 +5,8 @@
  * @Date: 2020年08月10 15:56:42
  */
 
+import { StatusCode } from "./code.enum";
+
 export interface ResultBean {
   code: number;
   message: string;
@@ -14,7 +16,7 @@ export interface ResultBean {
 export class ResultGenerator {
   static success(data: any = {}, message:string = 'success'): ResultBean {
     const result: ResultBean = {
-      code: 10,
+      code: StatusCode.SUCCESS,
       message,
       data,
     };
