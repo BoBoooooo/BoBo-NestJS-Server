@@ -89,7 +89,7 @@ export abstract class BaseService<T> {
     // 拼接分页条件
     // 若pageIndex,pageSize = 0,0
     // 则默认查询全部
-    if (pageIndex + pageSize > 1) {
+    if (pageIndex && pageSize && (pageIndex + pageSize > 1)) {
       params.skip = (pageIndex - 1) * pageSize;
       params.take = pageSize;
     }
