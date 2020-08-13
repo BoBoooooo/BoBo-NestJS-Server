@@ -12,6 +12,7 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UploadModule } from './module/upload/upload.module';
+import { EventsModule } from './events/events.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -28,10 +29,11 @@ import { UploadModule } from './module/upload/upload.module';
       rootPath: join(__dirname, '..', 'public'),
       exclude: ['/api*'],
     }),
+    EventsModule,
     UsersModule,
     AuthModule,
     PersonModule,
-    UploadModule
+    UploadModule,
   ],
   controllers: [AppController, UsersController],
   providers: [

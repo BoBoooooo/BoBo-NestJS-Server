@@ -14,7 +14,9 @@ declare const module: any;
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { cors: true });
-
+  app.enableCors({
+    origin: true
+  })
   const options = new DocumentBuilder()
     .setTitle('Anshare Swagger')
     .setDescription('API description')
