@@ -82,12 +82,12 @@
         console.log('链接成功');
 
         // 发射
-        socket.emit('events', {
+        socket.emit('message', {
           name: 'ajanuw',
         });
 
         // 发射
-        socket.emit('events', {
+        socket.emit('message', {
           name: 'alone',
         });
 
@@ -96,8 +96,8 @@
       });
 
       // 监听
-      socket.on('events', data => {
-        l(data.msg);
+      socket.on('message', data => {
+        l(data);
       });
     </script>
   </body>
