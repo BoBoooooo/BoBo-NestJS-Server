@@ -1,100 +1,31 @@
 <html>
   <head>
     <title>
-      flex学习
+      Nest-Api-Server
     </title>
-    <style>
-      .box {
-        display: flex;
-        background: green;
-        flex-wrap: wrap;
-        height: 400px;
-        justify-content: center;
-        align-items: center;
-        padding: 10px;
-      }
-      .left {
-        width: 100px;
-        margin: 10px;
-        height: 100px;
-        flex-grow: 1;
-        background: rgb(158, 23, 23);
-      }
-      /* .inline{
-      background: white;
-      flex:auto;
-      text-align: center;
-      background:blue;
-    }
-    .left,.right{
-      flex-basis: 200px;
-      text-align: center;
-      background: yellow;
-    } */
-    </style>
   </head>
 
   <body>
-    <div class="box">
-      <div class="left">123</div>
-      <div class="left">123</div>
-      <div class="left">123</div>
-      <div class="left">123</div>
-      <div class="left">123</div>
-      <div class="left">123</div>
-      <div class="left">123</div>
-      <div class="left">123</div>
-      <div class="left">123</div>
-      <div class="left">123</div>
-      <div class="left">123</div>
-      <div class="left">123</div>
-      <div class="left">123</div>
-      <div class="left">123</div>
-      <div class="left">123</div>
-      <div class="left">123</div>
-      <div class="left">123</div>
-      <div class="left">123</div>
-      <div class="left">123</div>
-      <div class="left">123</div>
-      <div class="left">123</div>
-      <div class="left">123</div>
-      <div class="left">123</div>
-      <div class="left">123</div>
-      <div class="left">777</div>
-      <div class="left">777</div>
-      <div class="left">777</div>
-      <div class="left">777</div>
-      <div class="left">777</div>
-      <div class="left">777</div>
-      <div class="left">777</div>
-    </div>
+    <div>Nest-Api-Server</div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
-
     <script>
-      // axios.get('http://localhost:3000').then(res=>{
-      //   console.lg(res);
-      // })
-
       const l = console.log;
       let socket = io('http://localhost:8080');
       socket.on('connect', function() {
-        console.log('链接成功');
+        console.log('connect success !');
 
-        // 发射
+        // emit
         socket.emit('message', {
           name: 'ajanuw',
         });
 
-        // 发射
+        // emit
         socket.emit('message', {
           name: 'alone',
         });
-
-        // 发射
-        // socket.emit('identity', 0, (response) => console.log('Identity:', response));
       });
 
-      // 监听
+      // listen
       socket.on('message', data => {
         l(data);
       });
