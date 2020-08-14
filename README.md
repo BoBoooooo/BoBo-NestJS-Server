@@ -5,9 +5,17 @@
 ## Getting Start
 
 ```javascript
- git clone https://github.com/BoBoooooo/NestJS-API-Server.git
- npm install
- npm start
+ 1、git clone https://github.com/BoBoooooo/NestJS-API-Server.git
+ 2、npm install
+
+ 3、新建数据库 nest , 并导入 nest.sql
+ 4、修改以下两处位置 数据库密码
+ package.json->scripts->db
+ app.module.ts
+
+ 5、npm start
+ 6、Enjoy !!!
+
 ```
 
 ## Features
@@ -37,14 +45,14 @@
 eq:
 {
 	"searchCondition":[{
-		"field":"updatePwdTime",
-		"operator":"lt",
-		"value":"2020-05-14"
+		"field":"userName",
+		"operator":"like",
+		"value":"ce"
 	},
 	{
-		"field":"realName",
+		"field":"userName",
 		"operator":"like",
-		"value":"测"
+		"value":"shi"
 	}],
 	"pageIndex":1,
 	"pageSize":1,
@@ -53,7 +61,7 @@ eq:
 
 ===
 
-select * from x where updatePwdTime < '2020-05-14' and realName like '%测%' order by id desc limit 1,1 
+select * from x where userName like '%ce%' and userName like '%shi%' order by id desc limit 1,1 
 
 ```
 

@@ -7,7 +7,6 @@ import { UsersController } from './module/users/users.controller';
 import { Connection } from 'typeorm';
 import { APP_GUARD } from '@nestjs/core';
 import { RoleAuthGuard } from './guards/auth-guards';
-import { PersonModule } from './module/person/person.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -21,7 +20,7 @@ import { EventsModule } from './events/events.module';
       port: 3306,
       username: 'root',
       password: 'Anshare.cc',
-      database: 'sw3k_tm',
+      database: 'nest',
       entities: [__dirname + '/entities/*{.ts,.js}'],
       synchronize: true,
     }),
@@ -32,7 +31,6 @@ import { EventsModule } from './events/events.module';
     EventsModule,
     UsersModule,
     AuthModule,
-    PersonModule,
     UploadModule,
   ],
   controllers: [AppController, UsersController],
