@@ -12,11 +12,10 @@ let num = 0;
 
 @WebSocketGateway(8080)
 export class EventsGateway {
-  server: any;
+  @WebSocketServer() server;
   @SubscribeMessage('message')
   onEvent(client: any, payload: any): Observable<WsResponse<any>> {
-    // this.server.emit('resmsg', payload);  // io.emit('resmsg', payload)
-
+    this.server.emit('message', new Date().toLocaleString());  // io.emit('resmsg', payload)
     num++;
     console.log(`有一位用户链接!> ${num}`);
     client.on('disconnect', () => {

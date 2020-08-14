@@ -1,3 +1,9 @@
+/*
+ * @file: api异常拦截
+ * @copyright: NanJing Anshare Tech .Com
+ * @author: BoBo
+ * @Date: 2020年08月10 15:55:37
+ */
 import { StatusCode } from './../core/code.enum';
 import { HttpException, HttpStatus } from '@nestjs/common';
 

@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Redirect } from '@nestjs/common';
 import { AppService } from './app.service';
 import { NoAuth } from './guards/customize';
 
@@ -8,7 +8,8 @@ export class AppController {
 
   @NoAuth()
   @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  @Redirect('/public', 301)
+  root(): string {
+    return '';
   }
 }
