@@ -1,11 +1,13 @@
+import { UsersService } from './../users/users.service';
 import { JwtStrategy } from './../../guards/jwt.strategy';
 import { UsersModule } from '../users/users.module';
-import { Module } from '@nestjs/common';
+import { Module, Global } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from 'src/config/constants';
 
+@Global()
 @Module({
   imports: [
     PassportModule.register({ defaultStrategy: 'jwt' }),
@@ -13,9 +15,9 @@ import { jwtConstants } from 'src/config/constants';
       secret: jwtConstants.secret,
       signOptions: { expiresIn: jwtConstants.time }, // token 过期时效
     }),
-    UsersModule,
+    UsersModule
   ],
-  providers: [AuthService, JwtStrategy,],
+  providers: [AuthService, JwtStrategy],
   exports: [AuthService],
 })
 export class AuthModule {}

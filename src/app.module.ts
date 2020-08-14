@@ -29,11 +29,11 @@ import { EventsModule } from './events/events.module';
       exclude: ['/api*'],
     }),
     EventsModule,
-    UsersModule,
     AuthModule,
+    UsersModule,
     UploadModule,
   ],
-  controllers: [AppController, UsersController],
+  controllers: [AppController],
   providers: [
     AppService,
     {

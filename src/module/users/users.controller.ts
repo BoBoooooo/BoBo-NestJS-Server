@@ -1,3 +1,4 @@
+import { EventsGateway } from './../../events/events.gateway';
 import { NoAuth } from 'src/guards/customize';
 import { AuthService } from '../auth/auth.service';
 import { UsersService } from './users.service';
@@ -5,10 +6,13 @@ import {
   Controller,
   Post,
   Body,
+  Get,
+  Query,
 } from '@nestjs/common';
 import { ApiHeader } from '@nestjs/swagger';
 import { Users } from 'src/entities/Users';
 import { BaseController } from '../base/base.controller';
+import { WebSocketServer } from '@nestjs/websockets';
 
 
 @ApiHeader({
@@ -17,9 +21,11 @@ import { BaseController } from '../base/base.controller';
 })
 @Controller('users')
 export class UsersController extends BaseController<Users> {
+
   constructor(
     private usersService: UsersService,
     private readonly authService: AuthService,
+    private readonly eventsGateway:EventsGateway
   ) {
     super(usersService)
   }
@@ -46,5 +52,15 @@ export class UsersController extends BaseController<Users> {
           msg: `查无此人`,
         };
     }
+  }
+
+  /**
+   * socket.io 向客户端发送消息
+   */
+  @NoAuth()
+  @Get('emit')
+  async emit(@Query() params){
+    this.eventsGateway.server.emit('message', JSON.stringify(params));  
+    return 'emit'
   }
 }

@@ -7,7 +7,7 @@ import { TransformInterceptor } from './interceptor/transform.interceptor';
 import { AllExceptionsFilter } from './filter/any-exception.filter';
 import * as compression from 'compression';
 import { HttpExceptionFilter } from './filter/http-exception.filter';
-// import helmet from 'helmet';
+// import  * as helmet from 'helmet';
 
 
 declare const module: any;
@@ -17,6 +17,8 @@ async function bootstrap() {
   app.enableCors({
     origin: true
   })
+   // helmet安全
+  // app.use(helmet());
   const options = new DocumentBuilder()
     .setTitle('Anshare Swagger')
     .setDescription('API description')
@@ -35,8 +37,7 @@ async function bootstrap() {
   app.useGlobalFilters(new AllExceptionsFilter());
   // 开启gzip
   app.use(compression());
-  // helmet安全
-  // app.use(helmet());
+ 
   app.useGlobalFilters(new HttpExceptionFilter());
   
   await app.listen(3000);
