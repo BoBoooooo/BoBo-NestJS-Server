@@ -33,6 +33,29 @@
 - BaseController|BaseService 封装基础 CRUD 接口
 
 - list 接口支持高级查询,具体实现查看 BaseService
+```javascript
+eq:
+{
+	"searchCondition":[{
+		"field":"updatePwdTime",
+		"operator":"lt",
+		"value":"2020-05-14"
+	},
+	{
+		"field":"realName",
+		"operator":"like",
+		"value":"测"
+	}],
+	"pageIndex":1,
+	"pageSize":1,
+	"orderCondition":"id desc"
+}
+
+===
+
+select * from x where updatePwdTime < '2020-05-14' and realName like '%测%' order by id desc limit 1,1 
+
+```
 
 - 全局异常处理
   ```javascript
