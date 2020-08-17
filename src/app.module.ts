@@ -3,7 +3,6 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './module/users/users.module';
 import { AuthModule } from './module/auth/auth.module';
-import { UsersController } from './module/users/users.controller';
 import { Connection } from 'typeorm';
 import { APP_GUARD } from '@nestjs/core';
 import { RoleAuthGuard } from './guards/auth-guards';
@@ -12,17 +11,19 @@ import { join } from 'path';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UploadModule } from './module/upload/upload.module';
 import { EventsModule } from './events/events.module';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import customConfig from './config';
+
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: 'Anshare.cc',
-      database: 'nest',
-      entities: [__dirname + '/entities/*{.ts,.js}'],
-      synchronize: true,
+    ConfigModule.forRoot({
+      isGlobal: true, // 作用于全局
+      load: [customConfig], // 加载自定义配置项
+    }),
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule], // 数据库配置项依赖于ConfigModule，需在此引入
+      useFactory: (configService: ConfigService) => configService.get('DATABASE_CONFIG'),
+      inject: [ConfigService], // 记得注入服务，不然useFactory函数中获取不到ConfigService
     }),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'public'),
