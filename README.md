@@ -11,7 +11,7 @@
  3、新建数据库 nest , 并导入 nest.sql
  4、修改以下两处位置 数据库密码
  package.json->scripts->db
- app.module.ts
+ /src/config/development.ts
 
  5、npm start
  6、Enjoy !!!
@@ -90,4 +90,3 @@ select * from x where userName like '%ce%' and userName like '%shi%' order by id
 
 1. HMR , 目前根据官方 HMR 的实现方式遇到bug
 2. Redis 支持
-3. env配置文件接入
