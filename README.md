@@ -89,5 +89,5 @@ select * from x where userName like '%ce%' and userName like '%shi%' order by id
 ## ToDo
 
 1. HMR , 目前根据官方 HMR 的实现方式遇到bug
-2. Redis 存储token
-3. ...
+2. Redis 支持
+3. env配置文件接入
