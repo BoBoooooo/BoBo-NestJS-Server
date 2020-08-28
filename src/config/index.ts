@@ -1,6 +1,6 @@
-import developmentConfig from './development';
-import testConfig from './test';
-import productionConfig from './production';
+import developmentConfig from './env/development';
+import testConfig from './env/test';
+import productionConfig from './env/production';
 
 const configs = {
     development: developmentConfig,
