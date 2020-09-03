@@ -18,6 +18,26 @@
 
 ```
 
+## 目录结构
+
+```bash
+├── public                     # public
+│   └── index.html             # 测试socket.io页面
+├── src                        # src
+│   ├── config                 # 环境变量等配置文件
+│   ├── core                   # 通用定义文件
+│   ├── entities               # 数据库ORM Entity
+│   ├── events                 # webSocket
+│   ├── filter                 # 全局异常filter
+│   ├── guards                 # 路由守卫(鉴权)
+│   ├── interceptor            # interceptor
+│   ├── logs                   # logs
+│   ├── middleware             # middleware logs
+│   ├── module                 # 各个业务模块,包含base module
+│   ├── utils                  # 工具函数
+├── test                       # 测试
+```
+
 ## Features
 
 - 登录模块、jwt 鉴权
