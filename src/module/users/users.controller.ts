@@ -10,10 +10,9 @@ import {
   Query,
 } from '@nestjs/common';
 import { ApiHeader } from '@nestjs/swagger';
-import { Users } from 'src/entities/Users';
 import { BaseController } from '../base/base.controller';
 import { WebSocketServer } from '@nestjs/websockets';
-
+import { Users } from 'src/entities/Users';
 
 @ApiHeader({
   name: 'users Module',
