@@ -15,7 +15,7 @@ export default {
     database: 'nest',
     timezone: 'UTC',
     charset: 'utf8mb4',
-    entities: [join(__dirname, '..', '/entities/*{.ts,.js}')],
+    entities: [join(__dirname, '..','..', '/entities/*{.ts,.js}')],
     synchronize: true,
     logging: true,
   },
