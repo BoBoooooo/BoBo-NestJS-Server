@@ -1,22 +1,20 @@
 # NestJS-API-Server
 
-一套轻量级 nestjs-api 脚手架,欢迎 Star!
+轻量级 nestjs-api 脚手架,欢迎 Star!
+配套前端地址 https://github.com/BoBoooooo/Anshare_Vue_Admin.git
 
 ## Getting Start
 
-```javascript
- 1、git clone https://github.com/BoBoooooo/NestJS-API-Server.git
- 2、npm install
-
- 3、新建数据库 nest , 并导入 nest.sql
- 4、修改以下两处位置 数据库密码
- package.json->scripts->db
- /src/config/development.ts
-
- 5、npm start
- 6、Enjoy !!!
-
-```
+* git clone https://github.com/BoBoooooo/NestJS-API-Server.git
+* npm install
+* 配置mysql数据库
+  * 新建数据库 nest 
+  * 导入 nest.sql
+  * 修改以下相关配置
+    * package.json->scripts->db
+    * /src/config/development.ts
+* npm start
+* Enjoy !!
 
 ## 目录结构
 
@@ -36,52 +34,50 @@
 │   ├── module                 # 各个业务模块,包含base module
 │   ├── utils                  # 工具函数
 ├── test                       # 测试
-```
+````
 
 ## Features
 
 - 登录模块、jwt 鉴权
 
   ```javascript
-  全局jwt验证拦截 
-  /src/guards /auth-guards.ts 
-  /src/app.module.ts;
+  全局jwt验证拦截 / src / guards / auth - guards.ts / src / app.module.ts;
   ```
 
 - socket.io
 
   ```javascript
-  默认socket.io监听8080端口 
-  /src/events/events.gateway.ts;
+  默认socket.io监听8080端口 / src / events / events.gateway.ts;
 
-  client端实现查看 
-  /public/index.html;
+  client端实现查看 / public / index.html;
   ```
 
 - BaseController|BaseService 封装基础 CRUD 接口
 
 - list 接口支持高级查询,具体实现查看 BaseService
+
 ```javascript
-eq:
-{
-	"searchCondition":[{
-		"field":"userName",
-		"operator":"like",
-		"value":"ce"
-	},
-	{
-		"field":"userName",
-		"operator":"like",
-		"value":"shi"
-	}],
-	"pageIndex":1,
-	"pageSize":1,
-	"orderCondition":"id desc"
-}
+curl - POST /users/list
+传参示例:
+  {
+    "searchCondition":[{
+      "field":"userName",
+      "operator":"like",
+      "value":"ce"
+    },
+    {
+      "field":"userName",
+      "operator":"like",
+      "value":"shi"
+    }],
+    "pageIndex":1,
+    "pageSize":1,
+    "orderCondition":"id desc"
+  }
 
 ===
-
-select * from x where userName like '%ce%' and userName like '%shi%' order by id desc limit 1,1 
+最后生成的sql：
+select * from users where userName like '%ce%' and userName like '%shi%' order by id desc limit 1,1
 
 ```
 
@@ -93,9 +89,7 @@ select * from x where userName like '%ce%' and userName like '%shi%' order by id
   ```
 - log 日志
   ```javascript
-  采用log4js 
-  /src/log 
-  /src/config/log4js.ts;
+  采用log4js / src / log / src / config / log4js.ts;
   ```
 - 统一 api ResultBean 封装
 
@@ -108,5 +102,5 @@ select * from x where userName like '%ce%' and userName like '%shi%' order by id
 
 ## ToDo
 
-1. HMR , 目前根据官方 HMR 的实现方式遇到bug
+1. HMR , 目前根据官方 HMR 的实现方式遇到 bug
 2. Redis 支持
