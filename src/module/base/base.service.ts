@@ -20,7 +20,6 @@ import {
   IsNull,
 } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { ResultGenerator } from './../../core/resultBean';
 
 interface searchType {
   field: string;
@@ -37,7 +36,7 @@ interface SearchCondition {
 
 @Injectable()
 export abstract class BaseService<T> {
-  protected repository: Repository<T>;
+  public repository: Repository<T>;
   constructor(@InjectRepository(BaseEntity) repository: Repository<T>) {
     this.repository = repository;
   }

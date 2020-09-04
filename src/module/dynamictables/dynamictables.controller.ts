@@ -1,8 +1,9 @@
 import { DynamictablesService } from './dynamictables.service';
-import { Controller, } from '@nestjs/common';
+import { Controller, Post , Query } from '@nestjs/common';
 import { ApiHeader } from '@nestjs/swagger';
 import { Dynamictables } from 'src/entities/Dynamictables';
 import { BaseController } from 'src/module/base/base.controller';
+import { ResultGenerator } from 'src/core/resultBean';
 
 @ApiHeader({
   name: '表格管理',
@@ -11,8 +12,17 @@ import { BaseController } from 'src/module/base/base.controller';
 @Controller('dynamictables')
 export class DynamictablesController extends BaseController<Dynamictables> {
   constructor(
-    private DynamictablesService: DynamictablesService,
+    private dynamictablesService: DynamictablesService,
   ) {
-    super(DynamictablesService);
+    super(dynamictablesService);
+  }
+  @Post('detail')
+  async getFormJson(@Query() query) {
+    const table = await this.dynamictablesService.repository.findOne({
+      where: {
+        tableName: query.tablename,
+      },
+    });
+    return ResultGenerator.success(table);
   }
 }
