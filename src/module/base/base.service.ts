@@ -45,30 +45,30 @@ export abstract class BaseService<T> {
   // 新增接口
   async add(entity: T) {
     await this.repository.insert(entity);
-    return ResultGenerator.success(entity, '新增成功');
+    return entity;
   }
   // 更新接口
   async update(id: string, entity: T) {
     await this.repository.update(id, entity);
-    return ResultGenerator.success(id, '更新成功');
+    return id;
   }
 
   // 删除接口
   async delete(id: string) {
     await this.repository.delete(id);
-    return ResultGenerator.success(id, '删除成功');
+    return id;
   }
 
   // 批量删除接口
   async deleteByIds(ids: string[]) {
     await this.repository.delete(ids);
-    return ResultGenerator.success(ids, '删除成功');
+    return ids;
   }
 
   // 查询ById接口
   async findById(id: string) {
     const result = await this.repository.findOne(id);
-    return ResultGenerator.success(result);
+    return result;
   }
 
   // list方法带高级查询

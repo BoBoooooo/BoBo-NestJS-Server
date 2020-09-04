@@ -21,4 +21,20 @@ export class UsersService extends BaseService<Users> {
       userName
     })
   }
+
+  /**
+   * 用户名查询是否存在该用户
+   * @param userName 用户名
+   */
+  async getUserInfo(userName:string){
+     const user = await this.usersRepository.createQueryBuilder("users")
+    .innerJoin("users.deptid", "dept")
+    .where("users.userName = :userName", { userName })
+    .getOne();
+    return user;
+  }
+
+
+
+
 }

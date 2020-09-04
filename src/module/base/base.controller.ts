@@ -42,6 +42,6 @@ export abstract class BaseController<T> {
 
   @Post('ping')
   public async ping(){
-    return ResultGenerator.success('ok!!!')
+    return ResultGenerator.success('','ok!!!')
   }
 }

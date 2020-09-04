@@ -1,22 +1,26 @@
+import { ResultGenerator } from './../../core/resultBean';
+import { DeptService } from './../dept/dept.service';
+import { RoleService } from './../role/role.service';
+import { Users } from './../../entities/Users';
 import { UsersService } from '../users/users.service';
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-
+const md5 = require('md5-node');
 @Injectable()
 export class AuthService {
+  user;
   constructor(
     private readonly usersService: UsersService,
+    private readonly roleService: RoleService,
+    private readonly deptService: DeptService,
     private readonly jwtService: JwtService,
   ) {}
 
-  // JWT验证 - Step 2: 校验用户信息
+  // 校验用户信息
   async validateUser(username: string, password: string): Promise<any> {
-    console.log('JWT验证 - Step 2: 校验用户信息');
     const user = await this.usersService.findByUserName(username);
     if (user) {
-      const userPassword = user.password;
-      // 通过密码盐，加密传参，再与数据库里的比较，判断是否相等
-      if (password === userPassword) {
+      if (md5(password).toUpperCase() === user.password) {
         // 密码正确
         return {
           code: 200,
@@ -25,41 +29,43 @@ export class AuthService {
       } else {
         // 密码错误
         return {
-          code: 600,
+          code: 800,
           user: null,
         };
       }
     }
     // 查无此人
     return {
-      code: 3,
+      code: 801,
       user: null,
     };
   }
 
-  // JWT验证 - Step 3: 处理 jwt 签证
-  async certificate(user: any) {
+  // 签发jwt
+  async certificate(user: Users) {
+    // 查找当前用户角色/部门
+    const role = await this.roleService.findById(user.roleId);
+    const dept = await this.deptService.findById(user.deptId);
+
     const payload = {
-      username: user.username,
-      sub: user.userId,
+      userName: user.userName,
+      userID: user.id,
+      deptID: user.deptId,
       realName: user.realName,
-      role: user.role,
+      roleID: user.roleId,
+      roleName: role.roleName,
+      deptName: dept.name,
+      roleAuthName: role.roleAuthName,
     };
-    console.log('JWT验证 - Step 3: 处理 jwt 签证');
-    try {
-      const token = this.jwtService.sign(payload);
-      return {
-        code: 200,
-        data: {
-          token,
-        },
-        msg: `登录成功`,
-      };
-    } catch (error) {
-      return {
-        code: 600,
-        msg: `账号或密码错误`,
-      };
-    }
+    const token = this.jwtService.sign(payload);
+    this.user = {
+      ...payload,
+      photo: user.photo,
+    };
+    return token;
+  }
+
+  getUser() {
+    return this.user;
   }
 }
