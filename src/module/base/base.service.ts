@@ -76,7 +76,7 @@ export abstract class BaseService<T> {
     // https://typeorm.io/#/find-options     ->     FindManyOptions
     const params: FindManyOptions = {
       // 缓存
-      cache:true
+      cache: true,
     };
 
     const { pageIndex, pageSize, searchCondition, orderCondition } = args;
@@ -89,21 +89,21 @@ export abstract class BaseService<T> {
     // 拼接分页条件
     // 若pageIndex,pageSize = 0,0
     // 则默认查询全部
-    if (pageIndex && pageSize && (pageIndex + pageSize > 1)) {
+    if (pageIndex && pageSize && pageIndex + pageSize > 1) {
       params.skip = (pageIndex - 1) * pageSize;
       params.take = pageSize;
     }
-    if(Array.isArray(searchCondition) && searchCondition.length>0){
+    if (Array.isArray(searchCondition) && searchCondition.length > 0) {
       // 拼接高级查询条件
       this.getSearchCondition(searchCondition, params);
     }
-    
+
     const [list, total] = await this.repository.findAndCount(params);
 
-    return ResultGenerator.success({
+    return {
       list,
       total,
-    });
+    };
   }
 
   getSearchCondition(searchCondition: searchType[], params: FindManyOptions) {

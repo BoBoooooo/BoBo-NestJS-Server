@@ -17,27 +17,27 @@ export abstract class BaseController<T> {
 
   @Post('list')
   public async list(@Body() body) {
-    return  this.service.find(body);
+    return  ResultGenerator.success(await this.service.find(body));
   }
 
   @Post('add')
   public async add(@Body() data: T) {
-    return ResultGenerator.success(this.service.add(data),'新增成功');
+    return ResultGenerator.success(await this.service.add(data),'新增成功');
   }
 
   @Post('update')
   public async update(@Body() data: T) {
-    return ResultGenerator.success(this.service.add(data),'更新成功');
+    return ResultGenerator.success(await this.service.add(data),'更新成功');
   }
 
   @Post('detail')
   public async detail(@Query() id: string) {
-    return ResultGenerator.success(this.service.findById(id));
+    return ResultGenerator.success(await this.service.findById(id));
   }
 
   @Post('delete')
   public async delete(@Body() id: string) {
-    return ResultGenerator.success(this.service.delete(id),'删除成功');
+    return ResultGenerator.success(await this.service.delete(id),'删除成功');
   }
 
   @Post('ping')

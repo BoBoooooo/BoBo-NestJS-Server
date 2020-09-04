@@ -1,3 +1,7 @@
+import { DynamictablesModule } from './module/dynamictables/dynamictables.module';
+import { FormModule } from './module/form/form.module';
+import { AdCodelistModule } from './module/ad-codelist/ad-codelist.module';
+import { RoleModule } from './module/role/role.module';
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -13,6 +17,7 @@ import { UploadModule } from './module/upload/upload.module';
 import { EventsModule } from './events/events.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import customConfig from './config';
+import { AdCodelistTypeModule } from './module/ad-codelist-type/ad-codelist-type.module';
 
 @Module({
   imports: [
@@ -33,6 +38,11 @@ import customConfig from './config';
     AuthModule,
     UsersModule,
     UploadModule,
+    RoleModule,
+    AdCodelistModule,
+    AdCodelistTypeModule,
+    FormModule,
+    DynamictablesModule
   ],
   controllers: [AppController],
   providers: [
