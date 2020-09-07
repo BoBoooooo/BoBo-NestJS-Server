@@ -1,4 +1,5 @@
 import { Column, Entity } from "typeorm";
+import { BoolBitTransformer } from "src/core/transform";
 
 @Entity("dynamictables", { schema: "nest" })
 export class Dynamictables {
@@ -30,11 +31,15 @@ export class Dynamictables {
   @Column("text", { name: "Remark", nullable: true, comment: "备注" })
   remark: string | null;
 
+ 
   @Column("bit", {
     name: "IsDeleted",
     comment: "记录删除标志 [0]-未删除;[1]-逻辑删除",
+    default: () => "'b'0''",
+    transformer: new BoolBitTransformer()
   })
   isDeleted: boolean;
+
 
   @Column("datetime", {
     name: "Timestamp",

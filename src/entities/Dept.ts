@@ -1,4 +1,5 @@
 import { Column, Entity, Index } from "typeorm";
+import { BoolBitTransformer } from "src/core/transform";
 
 @Index("index_id", ["id"], { unique: true })
 @Entity("dept", { schema: "nest" })
@@ -25,11 +26,15 @@ export class Dept {
   })
   parentId: string | null;
 
+ 
   @Column("bit", {
     name: "IsDeleted",
     comment: "记录删除标志 [0]-未删除;[1]-逻辑删除",
+    default: () => "'b'0''",
+    transformer: new BoolBitTransformer()
   })
   isDeleted: boolean;
+
 
   @Column("datetime", {
     name: "Timestamp",

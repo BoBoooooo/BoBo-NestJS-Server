@@ -1,4 +1,5 @@
 import { Column, Entity } from "typeorm";
+import { BoolBitTransformer } from "src/core/transform";
 
 @Entity("role", { schema: "nest" })
 export class Role {
@@ -21,9 +22,12 @@ export class Role {
   @Column("int", { name: "Rank", nullable: true, comment: "角色范围" })
   rank: number | null;
 
+
   @Column("bit", {
     name: "IsDeleted",
     comment: "记录删除标志 [0]-未删除;[1]-逻辑删除",
+    default: () => "'b'0''",
+    transformer: new BoolBitTransformer()
   })
   isDeleted: boolean;
 

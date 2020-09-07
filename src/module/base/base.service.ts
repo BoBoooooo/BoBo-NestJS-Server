@@ -5,6 +5,8 @@
  * @Date: 2020年08月10 10:44:35
  */
 import { Injectable } from '@nestjs/common';
+const guid  = require('uuid');
+const dayjs = require('dayjs')
 
 import {
   BaseEntity,
@@ -43,11 +45,19 @@ export abstract class BaseService<T> {
 
   // 新增接口
   async add(entity: T) {
+    // id为null则自动生成guid
+    if(!(entity as any).id){
+      (entity as any).id = guid.v4();
+    }
+    (entity as any).timestamp = dayjs().format('YYYY-MM-DD HH:mm:ss')
+
     await this.repository.insert(entity);
     return entity;
   }
   // 更新接口
   async update(id: string, entity: T) {
+    // 更新时间戳
+    (entity as any).timestamp = dayjs().format('YYYY-MM-DD HH:mm:ss')
     await this.repository.update(id, entity);
     return id;
   }
