@@ -38,6 +38,7 @@
     "@nestjs/typeorm": "^7.1.0",
     "@nestjs/websockets": "^7.4.2",
     "compression": "^1.7.4",
+    "dayjs": "^1.8.35",
     "helmet": "^4.0.0",
     "log4js": "^6.3.0",
     "md5-node": "^1.0.1",
@@ -52,7 +53,8 @@
     "rxjs": "^6.5.4",
     "stacktrace-js": "^2.0.2",
     "swagger-ui-express": "^4.1.4",
-    "typeorm": "^0.2.25"
+    "typeorm": "^0.2.25",
+    "uuid": "^8.3.0"
   },
   "devDependencies": {
     "@nestjs/cli": "^7.0.0",
