@@ -4,7 +4,7 @@
   "description": "一套基于NestJS-API-Server",
   "author": "BoBo<boboooooo159@gmail.com>",
   "private": true,
-  "license": "Apache-2.0",
+  "license": "MIT",
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
