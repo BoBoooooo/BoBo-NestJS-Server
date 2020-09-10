@@ -11,7 +11,7 @@
  Target Server Version : 80021
  File Encoding         : 65001
 
- Date: 04/09/2020 17:10:06
+ Date: 10/09/2020 11:27:33
 */
 
 SET NAMES utf8mb4;
@@ -29,7 +29,7 @@ CREATE TABLE `ad_codelist` (
   `CodeTypeDict` varchar(100) DEFAULT NULL COMMENT '字典类型名称',
   `CodeOrder` decimal(8,0) DEFAULT NULL COMMENT '排序',
   `Remark` varchar(255) DEFAULT NULL COMMENT '备注',
-  `IsDeleted` bit(1) NOT NULL COMMENT '记录删除标志 [0]-未删除;[1]-逻辑删除',
+  `IsDeleted` bit(1) NOT NULL DEFAULT b'0' COMMENT '记录删除标志 [0]-未删除;[1]-逻辑删除',
   `Timestamp` datetime DEFAULT NULL COMMENT '创建时间',
   `TypeID` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`ID`)
@@ -57,7 +57,7 @@ CREATE TABLE `ad_codelist_type` (
   `CodeName` varchar(100) DEFAULT NULL COMMENT '字典类型描述',
   `CodeOrder` decimal(8,0) DEFAULT NULL COMMENT '排序',
   `Remark` varchar(255) DEFAULT NULL COMMENT '备注',
-  `IsDeleted` bit(1) NOT NULL COMMENT '记录删除标志 [0]-未删除;[1]-逻辑删除',
+  `IsDeleted` bit(1) NOT NULL DEFAULT b'0' COMMENT '记录删除标志 [0]-未删除;[1]-逻辑删除',
   `Timestamp` datetime DEFAULT NULL COMMENT '创建时间',
   `ParentID` varchar(36) DEFAULT NULL COMMENT '父级ID',
   PRIMARY KEY (`ID`) USING BTREE,
@@ -83,7 +83,7 @@ CREATE TABLE `dept` (
   `Name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '部门名称',
   `Rank` int DEFAULT NULL COMMENT '排序码',
   `ParentId` varchar(36) DEFAULT NULL COMMENT '上级ID',
-  `IsDeleted` bit(1) NOT NULL COMMENT '记录删除标志 [0]-未删除;[1]-逻辑删除',
+  `IsDeleted` bit(1) NOT NULL DEFAULT b'0' COMMENT '记录删除标志 [0]-未删除;[1]-逻辑删除',
   `Timestamp` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`ID`) USING BTREE,
   UNIQUE KEY `index_id` (`ID`) USING BTREE
@@ -108,7 +108,7 @@ CREATE TABLE `dynamictables` (
   `Position` text COMMENT '使用位置',
   `Optime` varchar(50) DEFAULT NULL COMMENT '操作时间',
   `Remark` text COMMENT '备注',
-  `IsDeleted` bit(1) NOT NULL COMMENT '记录删除标志 [0]-未删除;[1]-逻辑删除',
+  `IsDeleted` bit(1) NOT NULL DEFAULT b'0' COMMENT '记录删除标志 [0]-未删除;[1]-逻辑删除',
   `Timestamp` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='表格设计';
@@ -117,11 +117,12 @@ CREATE TABLE `dynamictables` (
 -- Records of dynamictables
 -- ----------------------------
 BEGIN;
-INSERT INTO `dynamictables` VALUES ('054cfb12-7db2-400b-9917-27d3105dbb09', 'dept', '{\"columns\":[{\"prop\":\"name\",\"label\":\"部门名称\",\"minWidth\":\"200\",\"sortable\":\"false\",\"searchable\":false,\"align\":\"left\",\"headerAlign\":\"center\"},{\"prop\":\"\",\"label\":\"操作\",\"minWidth\":\"280\",\"align\":\"center\",\"headerAlign\":\"center\",\"slotName\":\"actionColumn\",\"fixed\":\"right\",\"sortable\":\"false\",\"searchable\":false}]}', 'Dept.vue/部门设置', '2019-12-12 17:48:36', NULL, b'0', '2019-12-12 17:48:37');
-INSERT INTO `dynamictables` VALUES ('58da681b-af8f-4733-b7b0-9c037e9d0d8f', 'users', '{\"columns\":[{\"prop\":\"realname\",\"label\":\"姓名\",\"minWidth\":\"100\",\"sortable\":\"custom\",\"slotName\":\"\",\"searchable\":true,\"align\":\"center\",\"headerAlign\":\"center\",\"showOverflowTooltip\":true},{\"prop\":\"username\",\"label\":\"登录名\",\"minWidth\":\"100\",\"sortable\":\"custom\",\"slotName\":\"\",\"searchable\":true,\"align\":\"center\",\"headerAlign\":\"center\",\"showOverflowTooltip\":true},{\"prop\":\"rolename\",\"label\":\"角色\",\"minWidth\":\"100\",\"sortable\":\"custom\",\"slotName\":\"\",\"option\":{\"width\":\"\",\"placeholder\":\"\",\"remote\":\"custom\",\"remoteFunc\":\"funcGetRole\",\"props\":{\"label\":\"label\",\"value\":\"value\"},\"type\":\"select\",\"selectBy\":\"label\"},\"searchable\":true,\"align\":\"center\",\"headerAlign\":\"center\",\"showOverflowTooltip\":true},{\"prop\":\"deptname\",\"label\":\"部门\",\"minWidth\":\"100\",\"sortable\":\"custom\",\"searchable\":true,\"align\":\"center\",\"headerAlign\":\"center\",\"showOverflowTooltip\":true},{\"prop\":\"position\",\"label\":\"岗位\",\"align\":\"center\",\"headerAlign\":\"center\",\"showOverflowTooltip\":true,\"minWidth\":\"90\",\"sortable\":\"custom\",\"searchable\":true},{\"prop\":\"logincount\",\"label\":\"账号状态\",\"align\":\"center\",\"headerAlign\":\"center\",\"showOverflowTooltip\":true,\"minWidth\":\"110\",\"sortable\":\"custom\",\"searchable\":false,\"slotName\":\"columnFormatter\"},{\"prop\":\"avatar\",\"label\":\"头像\",\"align\":\"center\",\"headerAlign\":\"center\",\"showOverflowTooltip\":true,\"minWidth\":\"100\",\"sortable\":\"custom\",\"searchable\":false,\"slotName\":\"columnFormatter\"},{\"prop\":\"signature\",\"label\":\"签名\",\"align\":\"center\",\"headerAlign\":\"center\",\"showOverflowTooltip\":true,\"minWidth\":140,\"sortable\":\"custom\",\"searchable\":false,\"slotName\":\"columnFormatter\"},{\"prop\":\"\",\"label\":\"操作\",\"minWidth\":\"270\",\"slotName\":\"actionColumn\",\"fixed\":\"right\",\"sortable\":\"false\",\"searchable\":false,\"align\":\"center\",\"headerAlign\":\"center\"}]}', 'Users.vue系统设置/角色管理', '2020-06-19 09:35:02', NULL, b'0', '2020-06-19 09:35:02');
+INSERT INTO `dynamictables` VALUES ('054cfb12-7db2-400b-9917-27d3105dbb09', 'dept', '{\"columns\":[{\"prop\":\"name\",\"label\":\"部门名称\",\"minWidth\":\"200\",\"sortable\":\"false\",\"searchable\":false,\"align\":\"left\",\"headerAlign\":\"center\"},{\"prop\":\"\",\"label\":\"操作\",\"minWidth\":\"280\",\"align\":\"center\",\"headerAlign\":\"center\",\"slotName\":\"actionColumn\",\"fixed\":\"right\",\"sortable\":\"false\",\"searchable\":false}]}', 'Dept.vue/部门设置', '2019-12-12 17:48:36', NULL, b'0', '2020-09-10 03:09:17');
+INSERT INTO `dynamictables` VALUES ('58da681b-af8f-4733-b7b0-9c037e9d0d8f', 'users', '{\"columns\":[{\"prop\":\"realName\",\"label\":\"姓名\",\"minWidth\":\"100\",\"sortable\":\"custom\",\"slotName\":\"\",\"searchable\":true,\"align\":\"center\",\"headerAlign\":\"center\",\"showOverflowTooltip\":true},{\"prop\":\"userName\",\"label\":\"登录名\",\"minWidth\":\"100\",\"sortable\":\"custom\",\"slotName\":\"\",\"searchable\":true,\"align\":\"center\",\"headerAlign\":\"center\",\"showOverflowTooltip\":true},{\"prop\":\"roleName\",\"label\":\"角色\",\"minWidth\":\"100\",\"sortable\":\"custom\",\"slotName\":\"\",\"option\":{\"width\":\"\",\"placeholder\":\"\",\"remote\":\"custom\",\"remoteFunc\":\"funcGetRole\",\"props\":{\"label\":\"label\",\"value\":\"value\"},\"type\":\"select\",\"selectBy\":\"label\"},\"searchable\":true,\"align\":\"center\",\"headerAlign\":\"center\",\"showOverflowTooltip\":true},{\"prop\":\"deptName\",\"label\":\"部门\",\"minWidth\":\"100\",\"sortable\":\"custom\",\"searchable\":true,\"align\":\"center\",\"headerAlign\":\"center\",\"showOverflowTooltip\":true},{\"prop\":\"photo\",\"label\":\"头像\",\"align\":\"center\",\"headerAlign\":\"center\",\"showOverflowTooltip\":true,\"minWidth\":140,\"sortable\":\"custom\",\"searchable\":false,\"slotName\":\"columnFormatter\"},{\"prop\":\"\",\"label\":\"操作\",\"minWidth\":\"270\",\"slotName\":\"actionColumn\",\"fixed\":\"right\",\"sortable\":\"false\",\"searchable\":false,\"align\":\"center\",\"headerAlign\":\"center\"}]}', 'Users.vue系统设置/角色管理', '2020-06-19 09:35:02', NULL, b'0', '2020-09-10 03:12:30');
+INSERT INTO `dynamictables` VALUES ('72269942-3b4a-4000-b722-12c70febbab2', 'params', '{\"columns\":[{\"prop\":\"codeName\",\"label\":\"参数名称\",\"align\":\"center\",\"headerAlign\":\"center\",\"showOverflowTooltip\":true,\"minWidth\":140,\"sortable\":\"custom\",\"searchable\":true},{\"prop\":\"remark\",\"label\":\"参数键名\",\"align\":\"center\",\"headerAlign\":\"center\",\"showOverflowTooltip\":true,\"minWidth\":140,\"sortable\":\"custom\",\"searchable\":true},{\"prop\":\"codeValue\",\"label\":\"参数键值\",\"align\":\"center\",\"headerAlign\":\"center\",\"showOverflowTooltip\":true,\"minWidth\":140,\"sortable\":\"custom\",\"searchable\":true},{\"prop\":\"\",\"label\":\"操作\",\"minWidth\":180,\"align\":\"center\",\"headerAlign\":\"center\",\"slotName\":\"actionColumn\",\"fixed\":\"right\",\"sortable\":\"false\",\"searchable\":false}]}', '参数设置', '2020-07-25 15:35:05', NULL, b'0', '2020-09-10 03:18:17');
 INSERT INTO `dynamictables` VALUES ('f2ad95ae-61d7-4bc3-94d6-dc00e867fdbe', 'dynamictables', '{\"columns\":[{\"prop\":\"tableName\",\"label\":\"表名\",\"minWidth\":140,\"sortable\":\"custom\",\"slotName\":\"\",\"searchable\":true,\"align\":\"left\",\"headerAlign\":\"center\"},{\"prop\":\"position\",\"label\":\"使用位置\",\"minWidth\":\"300\",\"sortable\":\"custom\",\"slotName\":\"\",\"searchable\":true,\"align\":\"left\",\"headerAlign\":\"center\"},{\"prop\":\"optime\",\"label\":\"更新时间\",\"minWidth\":140,\"sortable\":\"custom\",\"searchable\":true,\"align\":\"center\",\"headerAlign\":\"center\"},{\"prop\":\"\",\"label\":\"操作\",\"minWidth\":\"150\",\"slotName\":\"actionColumn\",\"fixed\":\"right\",\"sortable\":\"false\",\"searchable\":false,\"align\":\"center\",\"headerAlign\":\"center\",\"width\":\"200\"}]}', 'TableDesigner.vue开发人员工具/表格设计', '2019-12-25 16:31:32', NULL, b'0', '2019-12-25 16:31:33');
 INSERT INTO `dynamictables` VALUES ('fb8a5d7c-2fda-4936-9da0-dc09354adfdc', 'form', '{\"columns\":[{\"prop\":\"tableName\",\"label\":\"表名\",\"minWidth\":140,\"sortable\":\"custom\",\"searchable\":true,\"align\":\"left\",\"headerAlign\":\"center\"},{\"prop\":\"position\",\"label\":\"使用位置\",\"minWidth\":\"300\",\"sortable\":\"custom\",\"searchable\":true,\"align\":\"left\",\"headerAlign\":\"center\"},{\"prop\":\"optime\",\"label\":\"更新时间\",\"minWidth\":140,\"sortable\":\"custom\",\"searchable\":true,\"align\":\"center\",\"headerAlign\":\"center\"},{\"prop\":\"\",\"label\":\"操作\",\"minWidth\":\"150\",\"slotName\":\"actionColumn\",\"fixed\":\"right\",\"sortable\":\"false\",\"searchable\":false,\"align\":\"center\",\"headerAlign\":\"center\"}]}', 'FormDesigner.vue开发人员工具/表单设计', '2019-12-25 16:31:19', NULL, b'0', '2019-12-25 16:31:20');
-INSERT INTO `dynamictables` VALUES ('fc442e2b-a7f9-4fab-8d59-2803ae2a9215', 'role', '{\"columns\":[{\"prop\":\"rolename\",\"label\":\"角色\",\"minWidth\":140,\"sortable\":\"custom\",\"slotName\":\"\",\"align\":\"left\",\"headerAlign\":\"center\",\"searchable\":true},{\"prop\":\"rank\",\"label\":\"排序\",\"minWidth\":140,\"sortable\":\"custom\",\"slotName\":\"\",\"align\":\"left\",\"headerAlign\":\"center\",\"searchable\":true},{\"prop\":\"roleauthnamedict\",\"label\":\"菜单\",\"minWidth\":140,\"sortable\":\"custom\",\"slotName\":\"\",\"align\":\"left\",\"headerAlign\":\"center\",\"searchable\":true,\"showOverflowTooltip\":true},{\"prop\":\"homepagedict\",\"label\":\"登录后跳转到\",\"minWidth\":\"160\",\"sortable\":\"custom\",\"searchable\":true,\"align\":\"left\",\"headerAlign\":\"center\"},{\"prop\":\"\",\"label\":\"操作\",\"minWidth\":180,\"slotName\":\"actionColumn\",\"fixed\":\"right\",\"sortable\":\"false\",\"searchable\":false,\"headerAlign\":\"center\",\"align\":\"center\"}]}', 'Role.vue系统设置/角色管理', '2019-04-04 10:58:49', NULL, b'0', '2019-04-04 10:58:50');
+INSERT INTO `dynamictables` VALUES ('fc442e2b-a7f9-4fab-8d59-2803ae2a9215', 'role', '{\"columns\":[{\"prop\":\"roleName\",\"label\":\"角色\",\"minWidth\":140,\"sortable\":\"custom\",\"slotName\":\"\",\"align\":\"left\",\"headerAlign\":\"center\",\"searchable\":true},{\"prop\":\"rank\",\"label\":\"排序\",\"minWidth\":140,\"sortable\":\"custom\",\"slotName\":\"\",\"align\":\"left\",\"headerAlign\":\"center\",\"searchable\":true},{\"prop\":\"roleAuthNameDict\",\"label\":\"菜单\",\"minWidth\":140,\"sortable\":\"custom\",\"slotName\":\"\",\"align\":\"left\",\"headerAlign\":\"center\",\"searchable\":true,\"showOverflowTooltip\":true},{\"prop\":\"homePageDict\",\"label\":\"登录后跳转到\",\"minWidth\":\"160\",\"sortable\":\"custom\",\"searchable\":true,\"align\":\"left\",\"headerAlign\":\"center\"},{\"prop\":\"\",\"label\":\"操作\",\"minWidth\":180,\"slotName\":\"actionColumn\",\"fixed\":\"right\",\"sortable\":\"false\",\"searchable\":false,\"headerAlign\":\"center\",\"align\":\"center\"}]}', 'Role.vue系统设置/角色管理', '2019-04-04 10:58:49', NULL, b'0', '2020-09-10 03:10:36');
 COMMIT;
 
 -- ----------------------------
@@ -135,7 +136,7 @@ CREATE TABLE `form` (
   `Position` text COMMENT '使用位置',
   `Optime` varchar(50) DEFAULT NULL COMMENT '操作时间',
   `Remark` text COMMENT '备注',
-  `IsDeleted` bit(1) NOT NULL COMMENT '记录删除标志 [0]-未删除;[1]-逻辑删除',
+  `IsDeleted` bit(1) NOT NULL DEFAULT b'0' COMMENT '记录删除标志 [0]-未删除;[1]-逻辑删除',
   `Timestamp` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='表单设计';
@@ -153,6 +154,28 @@ INSERT INTO `form` VALUES ('786506c7-7d3a-4bec-a9fb-f374b9eecbb7', 'dynamictable
 COMMIT;
 
 -- ----------------------------
+-- Table structure for log
+-- ----------------------------
+DROP TABLE IF EXISTS `log`;
+CREATE TABLE `log` (
+  `ID` char(36) NOT NULL,
+  `UserID` char(36) DEFAULT NULL,
+  `OptTime` timestamp NULL DEFAULT NULL,
+  `IP` varchar(20) DEFAULT NULL,
+  `Region` varchar(50) DEFAULT NULL,
+  `Account` varchar(50) DEFAULT NULL,
+  `OptType` varchar(50) DEFAULT NULL,
+  `Content` varchar(10000) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of log
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- ----------------------------
 -- Table structure for role
 -- ----------------------------
 DROP TABLE IF EXISTS `role`;
@@ -162,7 +185,7 @@ CREATE TABLE `role` (
   `RoleAuthName` text COMMENT '权限',
   `RoleAuthNameDict` longtext COMMENT '权限名称',
   `Rank` int DEFAULT NULL COMMENT '角色范围',
-  `IsDeleted` bit(1) NOT NULL COMMENT '记录删除标志 [0]-未删除;[1]-逻辑删除',
+  `IsDeleted` bit(1) NOT NULL DEFAULT b'0' COMMENT '记录删除标志 [0]-未删除;[1]-逻辑删除',
   `Timestamp` datetime DEFAULT NULL COMMENT '创建时间',
   `HomePage` varchar(255) DEFAULT NULL COMMENT '角色默认首页设置',
   `HomePageDict` varchar(255) DEFAULT NULL COMMENT '角色默认首页名称设置',
@@ -189,12 +212,8 @@ CREATE TABLE `users` (
   `Password` varchar(50) DEFAULT NULL,
   `RealName` varchar(20) DEFAULT NULL,
   `Rank` int DEFAULT '0',
-  `IsDeleted` bit(1) NOT NULL COMMENT '记录删除标志 [0]-未删除;[1]-逻辑删除',
+  `IsDeleted` bit(1) NOT NULL DEFAULT b'0' COMMENT '记录删除标志 [0]-未删除;[1]-逻辑删除',
   `Timestamp` datetime DEFAULT NULL COMMENT '创建时间',
-  `MD5` varchar(255) DEFAULT NULL,
-  `LoginCount` varchar(255) DEFAULT NULL COMMENT '登录失败次数',
-  `IsLock` varchar(255) DEFAULT NULL COMMENT '用户锁定',
-  `UpdatePwdTime` varchar(255) DEFAULT NULL COMMENT '更新密码时间',
   `Tel` varchar(255) DEFAULT NULL COMMENT '联系方式',
   `Photo` longtext COMMENT '照片',
   PRIMARY KEY (`ID`) USING BTREE,
@@ -207,7 +226,7 @@ CREATE TABLE `users` (
 -- Records of users
 -- ----------------------------
 BEGIN;
-INSERT INTO `users` VALUES ('00000000-1000-0000-0000-000000000000', 'admin', '2f8447de-5732-4fa4-8286-9a71b41dd1e7', '00000000-1000-0000-0000-000000000000', 'FE08E6135740A5E9F62216D48C9CD42C', '超级管理员', 0, b'0', '2020-05-14 10:06:30', NULL, '0', '', NULL, NULL, 'data:image/jpg;base64,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');
+INSERT INTO `users` VALUES ('00000000-1000-0000-0000-000000000000', 'admin', '2f8447de-5732-4fa4-8286-9a71b41dd1e7', '00000000-1000-0000-0000-000000000000', '202CB962AC59075B964B07152D234B70', '超级管理员', 0, b'0', '2020-05-14 10:06:30', NULL, 'data:image/jpg;base64,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');
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;
