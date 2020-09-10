@@ -55,11 +55,11 @@ export abstract class BaseService<T> {
     return entity;
   }
   // 更新接口
-  async update(id: string, entity: T) {
+  async update(entity: T) {
     // 更新时间戳
     (entity as any).timestamp = dayjs().format('YYYY-MM-DD HH:mm:ss')
-    await this.repository.update(id, entity);
-    return id;
+    await this.repository.update((entity as any).id, entity);
+    return (entity as any).id;
   }
 
   // 删除接口

@@ -27,7 +27,7 @@ export abstract class BaseController<T> {
 
   @Post('update')
   public async update(@Body() data: T) {
-    return ResultGenerator.success(await this.service.add(data),'更新成功');
+    return ResultGenerator.success(await this.service.update(data),'更新成功');
   }
 
   @Post('detail')
