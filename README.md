@@ -52,7 +52,19 @@
   client端实现查看 / public / index.html;
   ```
 
-- BaseController|BaseService 封装基础 CRUD 接口
+- BaseController| BaseService 封装基础 CRUD 接口
+
+``` javascript
+// 所有模块包含以下几种通用接口,详见 BaseService
+ const enum = {
+    INSERT: 'add',  
+    UPDATE: 'update',
+    DELETE: 'delete',
+    SELECT: 'list',
+    TREE: 'tree',
+    DETAIL: 'detail',
+ } 
+```
 
 - list 接口支持高级查询,具体实现查看 BaseService
 
