@@ -42,33 +42,6 @@ export class Users {
   })
   timestamp: Date | null;
 
-  @Column("varchar", { name: "MD5", nullable: true, length: 255 })
-  md5: string | null;
-
-  @Column("varchar", {
-    name: "LoginCount",
-    nullable: true,
-    comment: "登录失败次数",
-    length: 255,
-  })
-  loginCount: string | null;
-
-  @Column("varchar", {
-    name: "IsLock",
-    nullable: true,
-    comment: "用户锁定",
-    length: 255,
-  })
-  isLock: string | null;
-
-  @Column("varchar", {
-    name: "UpdatePwdTime",
-    nullable: true,
-    comment: "更新密码时间",
-    length: 255,
-  })
-  updatePwdTime: string | null;
-
   @Column("varchar", {
     name: "Tel",
     nullable: true,
