@@ -36,12 +36,12 @@ export abstract class BaseController<T> {
   }
 
   @Post('delete')
-  public async delete(@Body() id: string) {
+  public async delete(@Query() id: string) {
     return ResultGenerator.success(await this.service.delete(id),'删除成功');
   }
 
-  @Post('ping')
-  public async ping(){
-    return ResultGenerator.success('','ok!!!')
+  @Post('tree')
+  public async tree(){
+    return ResultGenerator.success(await this.service.tree())
   }
 }

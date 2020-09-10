@@ -80,6 +80,13 @@ export abstract class BaseService<T> {
     return result;
   }
 
+ // tree接口
+  async tree(){
+    const result = await this.repository.find();
+    // 此处默认顶层parentId 为 0 , 自行修改
+    return toTree(result,'0');
+  }
+
   // list方法带高级查询
   async find(args: SearchCondition) {
     // https://typeorm.io/#/find-options     ->     FindManyOptions
@@ -166,3 +173,24 @@ export abstract class BaseService<T> {
     }
   }
 }
+
+
+/**
+ * 递归遍历list,返回tree结构
+ */
+function toTree(list,parId){
+	let len = list.length
+	function loop(parId){
+		let res = [];
+		for(let i = 0; i < len; i++){
+			let item = list[i]
+			if(item.parentId === parId){
+				item.children = loop(item.id)
+				res.push(item)
+			}
+		}
+		return res
+	}
+	return loop(parId)
+}
+

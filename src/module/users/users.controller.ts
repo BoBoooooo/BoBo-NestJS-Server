@@ -7,7 +7,7 @@ import { ApiHeader } from '@nestjs/swagger';
 import { BaseController } from '../base/base.controller';
 import { Users } from 'src/entities/Users';
 import { ResultGenerator } from 'src/core/resultBean';
-import md5 from 'md5-node'
+
 @ApiHeader({
   name: 'users Module',
   description: '用户设置',
