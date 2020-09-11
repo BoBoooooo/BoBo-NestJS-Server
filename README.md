@@ -16,7 +16,7 @@ socket.io测试地址 http://server.boboooooo.top:7788
   * 导入 nest.sql
   * 修改以下相关配置
     * package.json->scripts->db
-    * /src/config/development.ts
+    * /src/config/env/*
 * npm start
 * Enjoy !!
 
@@ -111,10 +111,11 @@ select * from users where userName like '%ce%' and userName like '%shi%' order b
 
 - 文件上传,静态资源服务
 
-- 一键生成数据库模型 `npm run db`
-  ```javascript
-  选用TypeOrm;
-  ```
+- 一键生成数据库模型 `npm run db`  (typeorm-model-generator)
+
+## 热更新
+
+nest start --watch (auto reload project)
 
 ## 部署
 
@@ -138,6 +139,5 @@ PORT=3000 // 指定监听端口
 
 ## ToDo
 
-1. HMR , 目前根据官方 HMR 的实现方式遇到 bug
-2. Redis 支持
-3. TypeOrm 多表查询
+1. Redis 支持
+2. TypeOrm 多表查询
