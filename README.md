@@ -1,7 +1,11 @@
 # NestJS-API-Server
 
 轻量级 nestjs-api 脚手架,欢迎 Star!
+
 配套前端地址 https://github.com/BoBoooooo/Anshare_Vue_Admin.git
+
+swagger地址 http://server.boboooooo.top:7788/api/
+socket.io测试地址 http://server.boboooooo.top:7788
 
 ## Getting Start
 
@@ -112,7 +116,28 @@ select * from users where userName like '%ce%' and userName like '%shi%' order b
   选用TypeOrm;
   ```
 
+## 部署
+
+``` javascript
+// 项目提供了 /src/config/env/dev,prod,test 三种环境变量配置文件
+
+// main入口监听端口号
+await app.listen(process.env.PORT || 3000);
+
+// 采用不同的npm命令实现多环境部署
+cross-env NODE_ENV=production   // npm 命令 cross-env指定当前环境
+PORT=3000 // 指定监听端口
+```
+
+具体流程
+* npm run build
+* 拷贝dist文件夹
+* 拷贝package.json
+* 服务器上执行 npm install 安装所需依赖 (此处大坑,依赖并不会被打包到dist文件夹中)
+* npm run start:prod  /  npm run pm2
+
 ## ToDo
 
 1. HMR , 目前根据官方 HMR 的实现方式遇到 bug
 2. Redis 支持
+3. TypeOrm 多表查询

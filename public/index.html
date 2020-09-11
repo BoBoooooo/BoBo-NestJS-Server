@@ -6,12 +6,15 @@
   </head>
 
   <body>
-    <div>Nest-Api-Server</div>
+    <div>如果对你有帮助的话,帮忙点点star! ^_^</div>
+    <div><a href="/api">swagger地址</a></div>
+    <div><a href="http://server.boboooooo.top:9999">前端演示地址</a></div>
+    <div><a href="https://github.com/BoBoooooo/BoBo-Vue-Admin">前端git地址</a></div>
     <div>打开console查看socket信息</div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
     <script>
       const l = console.log;
-      let socket = io('http://localhost:8080');
+      let socket = io('http://server.boboooooo.top:8080');
       socket.on('connect', function() {
         console.log('connect success !');
 
