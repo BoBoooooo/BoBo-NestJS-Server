@@ -5,6 +5,9 @@
  * @Date: 2020年08月10 10:44:35
  */
 import { Injectable } from '@nestjs/common';
+import { jwtConstants } from 'src/config/constants';
+import * as jwt from 'jsonwebtoken';
+
 const guid  = require('uuid');
 const dayjs = require('dayjs')
 
@@ -41,6 +44,19 @@ export abstract class BaseService<T> {
   public repository: Repository<T>;
   constructor(@InjectRepository(BaseEntity) repository: Repository<T>) {
     this.repository = repository;
+  }
+
+  /**
+   * 获取当前token携带信息
+   * jwt token
+   * @param authorization
+   */
+   getUserInfoFromToken(authorization) {
+    if (!authorization) return null;
+
+    const token = authorization.split(' ')[1];
+    const user = jwt.verify(token, jwtConstants.secret);
+    return user;
   }
 
   // 新增接口

@@ -2,7 +2,7 @@ import { EventsGateway } from './../../events/events.gateway';
 import { NoAuth } from 'src/guards/customize';
 import { AuthService } from '../auth/auth.service';
 import { UsersService } from './users.service';
-import { Controller, Post, Body, Get, Query } from '@nestjs/common';
+import { Controller, Post, Body, Get, Query, Req } from '@nestjs/common';
 import { ApiHeader } from '@nestjs/swagger';
 import { BaseController } from '../base/base.controller';
 import { Users } from 'src/entities/Users';
@@ -44,8 +44,10 @@ export class UsersController extends BaseController<Users> {
    * 获取用户身份信息
    */
   @Post('userinfo')
-  async userInfo() {
-    return ResultGenerator.success(this.authService.getUser());
+  async userInfo(@Req() req) {
+    // decoded token 信息
+    const user = this.usersService.getUserInfoFromToken(req.headers.authorization)
+    return ResultGenerator.success(user);
   }
 
   /**
