@@ -12,7 +12,7 @@ export class AdCodelist {
   @Column("varchar", {
     name: "CodeName",
     nullable: true,
-    comment: "字典值描述",
+    comment: "字典值",
     length: 100,
   })
   codeName: string | null;
@@ -24,14 +24,6 @@ export class AdCodelist {
     length: 50,
   })
   codeType: string | null;
-
-  @Column("varchar", {
-    name: "CodeTypeDict",
-    nullable: true,
-    comment: "字典类型名称",
-    length: 100,
-  })
-  codeTypeDict: string | null;
 
   @Column("decimal", {
     name: "CodeOrder",
@@ -66,7 +58,4 @@ export class AdCodelist {
     comment: "创建时间",
   })
   timestamp: Date | null;
-
-  @Column("varchar", { name: "TypeID", nullable: true, length: 50 })
-  typeId: string | null;
 }
