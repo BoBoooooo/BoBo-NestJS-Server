@@ -8,19 +8,13 @@ import { Post, Controller, UploadedFile, UseInterceptors, Body } from '@nestjs/c
 import { FileInterceptor } from '@nestjs/platform-express';
 import { UploadService } from './upload.service';
 
-@Controller('upload')
-@UseInterceptors(FileInterceptor('file', {
-    limits: {
-        fieldSize: 1024 * 1024,
-        fileSize: 1024 * 1024,
-    },
-}))
+@Controller('file')
+@UseInterceptors(FileInterceptor('file'))
 export class UploadController {
     constructor(private readonly uploadFileService: UploadService) {}
-    @Post('/file')
+    @Post('/upload')
     uploadFile(@UploadedFile() file, @Body() body): any {
-        console.log(file);
-        console.log(body.name);
-        return this.uploadFileService.uploadFile(file);
+        // 
+        return file
     }
 }
