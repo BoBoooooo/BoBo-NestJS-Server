@@ -107,8 +107,8 @@ export abstract class BaseService<T> {
   async find(args: SearchCondition) {
     // https://typeorm.io/#/find-options     ->     FindManyOptions
     const params: FindManyOptions = {
-      // 缓存
-      cache: true,
+      // 缓存 https://www.bookstack.cn/read/TypeORM-0.2.20-zh/caching.md
+      // cache: true,
     };
 
     const { pageIndex, pageSize, searchCondition, orderCondition } = args;

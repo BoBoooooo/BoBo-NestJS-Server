@@ -40,6 +40,16 @@ export abstract class BaseController<T> {
     return ResultGenerator.success(await this.service.delete(id),'删除成功');
   }
 
+
+  /**
+   * 批量删除接口
+   * @param id 
+   */
+  @Post('deleteByIds')
+  public async deleteByIds(@Body() id: string[]) {
+    return ResultGenerator.success(await this.service.deleteByIds(id),'删除成功');
+  }
+
   @Post('tree')
   public async tree(){
     return ResultGenerator.success(await this.service.tree())
