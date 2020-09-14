@@ -2,11 +2,21 @@ import { EventsGateway } from './../../events/events.gateway';
 import { NoAuth } from 'src/guards/customize';
 import { AuthService } from '../auth/auth.service';
 import { UsersService } from './users.service';
-import { Controller, Post, Body, Get, Query, Req } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  Get,
+  Query,
+  Req,
+  UploadedFile,
+  UseInterceptors,
+} from '@nestjs/common';
 import { ApiHeader } from '@nestjs/swagger';
 import { BaseController } from '../base/base.controller';
 import { Users } from 'src/entities/Users';
 import { ResultGenerator } from 'src/core/resultBean';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @ApiHeader({
   name: 'users Module',
@@ -46,7 +56,9 @@ export class UsersController extends BaseController<Users> {
   @Post('userinfo')
   async userInfo(@Req() req) {
     // decoded token 信息
-    const user = this.usersService.getUserInfoFromToken(req.headers.authorization)
+    const user = this.usersService.getUserInfoFromToken(
+      req.headers.authorization,
+    );
     return ResultGenerator.success(user);
   }
 
@@ -58,5 +70,26 @@ export class UsersController extends BaseController<Users> {
   async emit(@Query() params) {
     this.eventsGateway.server.emit('message', JSON.stringify(params));
     return 'emit';
+  }
+
+  /**
+   * 头像上传
+   * @param body
+   */
+  @Post('uploadImage')
+  @UseInterceptors(FileInterceptor('file')) // 此处file对应 field name
+  async uploadImage(@Body() body, @UploadedFile() file) {
+    const { userid } = body;
+    let base64str = Buffer.from(file.buffer, 'binary').toString('base64'); // base64编码
+    const user =await this.usersService.findById(userid);
+    if(user){
+      user.photo = `data:image/jpg;base64,${base64str}`;
+      this.usersService.update(user)
+        return ResultGenerator.success('', '上传成功');
+    }
+    else
+    {
+      return ResultGenerator.fail(400, '用户不存在');
+    }
   }
 }
