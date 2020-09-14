@@ -1,11 +1,10 @@
-import { ResultGenerator } from './../../core/resultBean';
 import { DeptService } from './../dept/dept.service';
 import { RoleService } from './../role/role.service';
 import { Users } from './../../entities/Users';
 import { UsersService } from '../users/users.service';
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-const md5 = require('md5-node');
+
 @Injectable()
 export class AuthService {
   user;
@@ -20,7 +19,7 @@ export class AuthService {
   async validateUser(username: string, password: string): Promise<any> {
     const user = await this.usersService.findByUserName(username);
     if (user) {
-      if (md5(password).toUpperCase() === user.password) {
+      if (password === user.password) {
         // 密码正确
         return {
           code: 200,
