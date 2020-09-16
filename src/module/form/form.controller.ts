@@ -45,7 +45,7 @@ export class FormController extends BaseController<Form> {
     const sql =
       'select COLUMN_NAME,DATA_TYPE,COLUMN_COMMENT from information_schema.COLUMNS where table_name = "' +
       query.tablename + '"' 
-      +'and table_schema = "nest" and COLUMN_NAME not like "%id%" and COLUMN_NAME not like "%isdeleted%" and COLUMN_NAME not like %timestamp%';
+      +'and table_schema = "nest" and COLUMN_NAME not like "%id%" and COLUMN_NAME not like "%isdeleted%" and COLUMN_NAME not like "%timestamp%"';
     const keys = await this.formService.repository.query(sql);
     return ResultGenerator.success(keys);
   }

@@ -34,6 +34,23 @@ export class UsersService extends BaseService<Users> {
     return user;
   }
 
+  async find(body) {
+    const qb = this.usersRepository
+      .createQueryBuilder('users')
+      .innerJoin('dept', 'dept', 'dept.id = users.deptid')
+      .innerJoin('role', 'role', 'role.id = users.roleid')
+    this.splitSql(qb, body);
+    qb.select('users.*')
+      .addSelect('dept.name',)
+      .addSelect('role.roleName')
+
+    const list = await qb.getRawMany();
+    const total = await qb.getCount();
+    return {
+      list,
+      total,
+    };
+  }
 
 
 

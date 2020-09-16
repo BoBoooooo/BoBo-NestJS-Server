@@ -8,14 +8,10 @@ import { Injectable } from '@nestjs/common';
 import { jwtConstants } from 'src/config/constants';
 import * as jwt from 'jsonwebtoken';
 
-const guid  = require('uuid');
-const dayjs = require('dayjs')
+const guid = require('uuid');
+const dayjs = require('dayjs');
 
-import {
-  BaseEntity,
-  Repository,
-  SelectQueryBuilder
-} from 'typeorm';
+import { BaseEntity, Repository, SelectQueryBuilder } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 
 interface searchType {
@@ -43,7 +39,7 @@ export abstract class BaseService<T> {
    * jwt token
    * @param authorization
    */
-   getUserInfoFromToken(authorization) {
+  getUserInfoFromToken(authorization) {
     if (!authorization) return null;
 
     const token = authorization.split(' ')[1];
@@ -54,19 +50,30 @@ export abstract class BaseService<T> {
   // 新增接口
   async add(entity: T) {
     // id为null则自动生成guid
-    if(!(entity as any).id){
+    if (!(entity as any).id) {
       (entity as any).id = guid.v4();
     }
-    (entity as any).timestamp = dayjs().format('YYYY-MM-DD HH:mm:ss')
+    (entity as any).timestamp = dayjs().format('YYYY-MM-DD HH:mm:ss');
 
     await this.repository.insert(entity);
     return entity;
   }
   // 更新接口
   async update(entity: T) {
+    const obj = JSON.parse(JSON.stringify(entity as any));
+
+    // 此处大坑,如果有更好的方案欢迎PR!
+    // 更新的时候去除伪列 (此处由于ts的类型检查不带入运行时,不会自动映射属性,否则数据库没有这个字段会报错)
+    Object.keys(obj).forEach(k=>{
+      // 此处如果是join表有伪劣的情况,目前key默认会变成 (表名_字段名) 的格式
+      if(k.includes('_')){
+        delete obj[k]
+      }
+    })
     // 更新时间戳
-    (entity as any).timestamp = dayjs().format('YYYY-MM-DD HH:mm:ss')
-    await this.repository.update((entity as any).id, entity);
+    obj.timestamp = dayjs().format('YYYY-MM-DD HH:mm:ss');
+    console.log(obj);
+    await this.repository.update(obj.id, obj);
     return (entity as any).id;
   }
 
@@ -88,15 +95,28 @@ export abstract class BaseService<T> {
     return result;
   }
 
- // tree接口
-  async tree(){
+  // tree接口
+  async tree() {
     const result = await this.repository.find();
     // 此处默认顶层parentId 为 0 , 自行修改
-    return toTree(result,'0');
+    return toTree(result, '0');
   }
 
-  async find(args: SearchCondition){
-    const qb = this.repository.createQueryBuilder()
+  async find(args: SearchCondition) {
+    const qb = this.repository.createQueryBuilder();
+
+    // 拼接sql
+    this.splitSql(qb, args);
+
+    const [list, total] = await qb.getManyAndCount();
+
+    return {
+      list,
+      total,
+    };
+  }
+
+  splitSql(qb: SelectQueryBuilder<T>, args: SearchCondition) {
     const { pageIndex, pageSize, searchCondition, orderCondition } = args;
     if (Array.isArray(searchCondition) && searchCondition.length > 0) {
       // 拼接高级查询条件
@@ -105,65 +125,57 @@ export abstract class BaseService<T> {
     // 拼接order条件
     if (orderCondition && orderCondition.includes(' ')) {
       const [field, order] = orderCondition.split(' ');
-      qb.orderBy(field, order.toUpperCase() as any)
+      qb.orderBy(field, order.toUpperCase() as any);
     }
-       // 拼接分页条件
+    // 拼接分页条件
     // 若pageIndex,pageSize = 0,0
     // 则默认查询全部
     if (pageIndex && pageSize && pageIndex + pageSize > 1) {
       qb.skip((pageIndex - 1) * pageSize);
       qb.take(pageSize);
     }
-
-    const [list,total] =await qb.getManyAndCount();
-
-    return {
-      list,
-      total,
-    };
-
   }
 
-  getSearchCondition(searchCondition: searchType[], qb:SelectQueryBuilder<T>) {
+  getSearchCondition(searchCondition: searchType[], qb: SelectQueryBuilder<T>) {
     // 一键搜 查询方式为orlike拼接
     let orLike = searchCondition.find(item => item.operator === 'orlike');
     if (orLike) {
       let fields = orLike.field.split(',');
       fields.forEach(field => {
-        qb.orWhere(`${field} LIKE :value`, { value: `%${orLike.value}%` })
+        qb.orWhere(`${field} LIKE :value`, { value: `%${orLike.value}%` });
       });
     } else {
       // ...
-      qb.where("1 = 1");
+      qb.where('1 = 1');
       searchCondition.forEach(obj => {
         const { value, operator, field } = obj;
         switch (operator) {
-          case 'eq': 
-            qb.where(`${field} = :value`,{value})
+          case 'eq':
+            qb.where(`${field} = :value`, { value });
             break;
           case 'neq':
-            qb.where(`${field} <> :value`,{value})
+            qb.where(`${field} <> :value`, { value });
             break;
           case 'notNull':
-            qb.where(`${field} is not null`)
+            qb.where(`${field} is not null`);
             break;
           case 'isNull':
-            qb.where(`${field} is null`)
+            qb.where(`${field} is null`);
             break;
           case 'gt':
-            qb.where(`${field} > :value`,{value})
+            qb.where(`${field} > :value`, { value });
             break;
           case 'lt':
-            qb.where(`${field} < :value`,{value})
+            qb.where(`${field} < :value`, { value });
             break;
           case 'egt':
-            qb.where(`${field} >= :value`,{value})
+            qb.where(`${field} >= :value`, { value });
             break;
           case 'elt':
-            qb.where(`${field} <= :value`,{value})
+            qb.where(`${field} <= :value`, { value });
             break;
           case 'like':
-            qb.where(`${field} LIKE :value`, { value: `%${value}%` })
+            qb.where(`${field} LIKE :value`, { value: `%${value}%` });
             break;
           default:
             break;
@@ -171,26 +183,23 @@ export abstract class BaseService<T> {
       });
     }
   }
-
 }
-
 
 /**
  * 递归遍历list,返回tree结构
  */
-function toTree(list,parId){
-	let len = list.length
-	function loop(parId){
-		let res = [];
-		for(let i = 0; i < len; i++){
-			let item = list[i]
-			if(item.parentId === parId){
-				item.children = loop(item.id)
-				res.push(item)
-			}
-		}
-		return res
-	}
-	return loop(parId)
+function toTree(list, parId) {
+  let len = list.length;
+  function loop(parId) {
+    let res = [];
+    for (let i = 0; i < len; i++) {
+      let item = list[i];
+      if (item.parentId === parId) {
+        item.children = loop(item.id);
+        res.push(item);
+      }
+    }
+    return res;
+  }
+  return loop(parId);
 }
-
