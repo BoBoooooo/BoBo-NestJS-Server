@@ -14,15 +14,7 @@ const dayjs = require('dayjs')
 import {
   BaseEntity,
   Repository,
-  FindManyOptions,
-  LessThan,
-  LessThanOrEqual,
-  MoreThan,
-  MoreThanOrEqual,
-  Like,
-  Equal,
-  Not,
-  IsNull,
+  SelectQueryBuilder
 } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 
@@ -103,84 +95,75 @@ export abstract class BaseService<T> {
     return toTree(result,'0');
   }
 
-  // list方法带高级查询
-  async find(args: SearchCondition) {
-    // https://typeorm.io/#/find-options     ->     FindManyOptions
-    const params: FindManyOptions = {
-      // 缓存 https://www.bookstack.cn/read/TypeORM-0.2.20-zh/caching.md
-      // cache: true,
-    };
-
+  async find(args: SearchCondition){
+    const qb = this.repository.createQueryBuilder()
     const { pageIndex, pageSize, searchCondition, orderCondition } = args;
+    if (Array.isArray(searchCondition) && searchCondition.length > 0) {
+      // 拼接高级查询条件
+      this.getSearchCondition(searchCondition, qb);
+    }
     // 拼接order条件
     if (orderCondition && orderCondition.includes(' ')) {
       const [field, order] = orderCondition.split(' ');
-      params.order = {};
-      params.order[field] = order.toUpperCase() === 'ASC' ? 1 : -1;
+      qb.orderBy(field, order.toUpperCase() as any)
     }
-    // 拼接分页条件
+       // 拼接分页条件
     // 若pageIndex,pageSize = 0,0
     // 则默认查询全部
     if (pageIndex && pageSize && pageIndex + pageSize > 1) {
-      params.skip = (pageIndex - 1) * pageSize;
-      params.take = pageSize;
-    }
-    if (Array.isArray(searchCondition) && searchCondition.length > 0) {
-      // 拼接高级查询条件
-      this.getSearchCondition(searchCondition, params);
+      qb.skip((pageIndex - 1) * pageSize);
+      qb.take(pageSize);
     }
 
-    const [list, total] = await this.repository.findAndCount(params);
+    const [list,total] =await qb.getManyAndCount();
 
     return {
       list,
       total,
     };
+
   }
 
-  getSearchCondition(searchCondition: searchType[], params: FindManyOptions) {
+  getSearchCondition(searchCondition: searchType[], qb:SelectQueryBuilder<T>) {
     // 一键搜 查询方式为orlike拼接
     let orLike = searchCondition.find(item => item.operator === 'orlike');
     if (orLike) {
-      params.where = [];
       let fields = orLike.field.split(',');
       fields.forEach(field => {
-        (params.where as any[]).push({
-          [field]: Like(`%${orLike.value}%`),
-        });
+        qb.orWhere(`${field} LIKE :value`, { value: `%${orLike.value}%` })
       });
     } else {
       // ...
-      params.where = {};
+      qb.where("1 = 1");
       searchCondition.forEach(obj => {
         const { value, operator, field } = obj;
         switch (operator) {
-          case 'eq': // =
-            params.where[field] = Equal(value);
+          case 'eq': 
+            qb.where(`${field} = :value`,{value})
             break;
           case 'neq':
-            params.where[field] = Not(value);
+            qb.where(`${field} <> :value`,{value})
             break;
           case 'notNull':
-            params.where[field] = Not(IsNull());
+            qb.where(`${field} is not null`)
             break;
           case 'isNull':
-            params.where[field] = IsNull();
+            qb.where(`${field} is null`)
             break;
           case 'gt':
-            params.where[field] = MoreThan(value);
+            qb.where(`${field} > :value`,{value})
             break;
           case 'lt':
-            params.where[field] = LessThan(value);
+            qb.where(`${field} < :value`,{value})
             break;
           case 'egt':
-            params.where[field] = MoreThanOrEqual(value);
+            qb.where(`${field} >= :value`,{value})
             break;
           case 'elt':
-            params.where[field] = LessThanOrEqual(value);
+            qb.where(`${field} <= :value`,{value})
             break;
           case 'like':
-            params.where[field] = Like(`%${value}%`);
+            qb.where(`${field} LIKE :value`, { value: `%${value}%` })
             break;
           default:
             break;
@@ -188,6 +171,7 @@ export abstract class BaseService<T> {
       });
     }
   }
+
 }
 
 
