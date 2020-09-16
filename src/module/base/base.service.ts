@@ -72,7 +72,6 @@ export abstract class BaseService<T> {
     })
     // 更新时间戳
     obj.timestamp = dayjs().format('YYYY-MM-DD HH:mm:ss');
-    console.log(obj);
     await this.repository.update(obj.id, obj);
     return (entity as any).id;
   }

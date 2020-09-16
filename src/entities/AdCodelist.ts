@@ -1,5 +1,4 @@
 import { Column, Entity, JoinColumn } from "typeorm";
-import { BoolBitTransformer } from "src/core/transform";
 
 @Entity("ad_codelist", { schema: "nest" })
 export class AdCodelist {
@@ -41,14 +40,6 @@ export class AdCodelist {
     length: 255,
   })
   remark: string | null;
-
-  @Column("bit", {
-    name: "isDeleted",
-    comment: "记录删除标志 [0]-未删除;[1]-逻辑删除",
-    default: () => "'b'0''",
-    transformer: new BoolBitTransformer()
-  })
-  isDeleted: boolean;
 
   @Column("datetime", {
     name: "timestamp",

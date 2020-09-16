@@ -1,5 +1,4 @@
 import { Column, Entity, Index } from 'typeorm';
-import { BoolBitTransformer } from 'src/core/transform';
 
 @Index('index_id', ['id'], {})
 @Index('index_username', ['userName'], {})
@@ -46,14 +45,6 @@ export class Users {
     default: () => "'0'",
   })
   rank: number | null;
-
-  @Column('bit', {
-    name: 'isDeleted',
-    comment: '记录删除标志 [0]-未删除;[1]-逻辑删除',
-    default: () => "'b'0''",
-    transformer: new BoolBitTransformer(),
-  })
-  isDeleted: boolean;
 
   @Column('datetime', {
     name: 'timestamp',
