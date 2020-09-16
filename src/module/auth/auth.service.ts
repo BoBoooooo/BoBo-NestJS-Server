@@ -55,6 +55,7 @@ export class AuthService {
       roleName: role.roleName,
       deptName: dept.name,
       roleAuthName: role.roleAuthName,
+      photo: user.photo
     };
     const token = this.jwtService.sign(payload);
     this.user = {
