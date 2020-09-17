@@ -39,12 +39,13 @@ export class AdCodelistType {
   })
   remark: string | null;
 
-  @Column("datetime", {
+  @Column("timestamp", {
     name: "timestamp",
-    nullable: true,
+    nullable: false,
     comment: "创建时间",
+    default: () => 'CURRENT_TIMESTAMP',
   })
-  timestamp: Date | null;
+  timestamp: Date;
 
   @Column("varchar", {
     name: "parentId",

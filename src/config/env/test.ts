@@ -1,3 +1,9 @@
+/*
+ * @file: 数据库配置文件 https://www.bookstack.cn/read/TypeORM-0.2.20-zh/connection-options.md
+ * @copyright: NanJing Anshare Tech .Com
+ * @author: BoBo
+ * @Date: 2020年09月15 14:16:42
+ */
 import { join } from 'path';
 
 export default {
@@ -13,7 +19,6 @@ export default {
     username: 'root',
     password: 'Anshare.cc',
     database: 'nest',
-    timezone: 'UTC',
     charset: 'utf8mb4',
     entities: [join(__dirname, '..','..', '/entities/*{.ts,.js}')],
     synchronize: true,

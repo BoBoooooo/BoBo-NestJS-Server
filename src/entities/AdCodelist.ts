@@ -41,13 +41,13 @@ export class AdCodelist {
   })
   remark: string | null;
 
-  @Column("datetime", {
-    name: "timestamp",
-    nullable: true,
-    comment: "创建时间",
-  })
-  timestamp: Date | null;
 
-  @JoinColumn()
-  typeName:string|null
+  @Column("timestamp", {
+    name: "timestamp",
+    nullable: false,
+    comment: "创建时间",
+    default: () => 'CURRENT_TIMESTAMP',
+  })
+  timestamp: Date;
+
 }

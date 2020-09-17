@@ -49,13 +49,15 @@ export abstract class BaseService<T> {
 
   // 新增接口
   async add(entity: T) {
-    // id为null则自动生成guid
-    if (!(entity as any).id) {
-      (entity as any).id = guid.v4();
-    }
-    (entity as any).timestamp = dayjs().format('YYYY-MM-DD HH:mm:ss');
+    const obj = JSON.parse(JSON.stringify(entity as any));
 
-    await this.repository.insert(entity);
+    // id为null则自动生成guid
+    if (!obj.id) {
+      obj.id = guid.v4();
+    }
+    obj.timestamp = dayjs(new Date()).format('YYYY-MM-DD HH:mm:ss');
+
+    await this.repository.insert(obj);
     return entity;
   }
   // 更新接口
@@ -65,13 +67,14 @@ export abstract class BaseService<T> {
     // 此处大坑,如果有更好的方案欢迎PR!
     // 更新的时候去除伪列 (此处由于ts的类型检查不带入运行时,不会自动映射属性,否则数据库没有这个字段会报错)
     Object.keys(obj).forEach(k=>{
-      // 此处如果是join表有伪劣的情况,目前key默认会变成 (表名_字段名) 的格式
-      if(k.includes('_')){
+      // 去除伪列,  伪列格式默认为 表名_字段名   例如保存users表 (dept_name)  详见/users/list方法 
+      if(k.includes('_')){ 
         delete obj[k]
       }
     })
     // 更新时间戳
-    obj.timestamp = dayjs().format('YYYY-MM-DD HH:mm:ss');
+    obj.timestamp = dayjs(new Date()).format('YYYY-MM-DD HH:mm:ss');
+
     await this.repository.update(obj.id, obj);
     return (entity as any).id;
   }

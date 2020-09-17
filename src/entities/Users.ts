@@ -46,12 +46,13 @@ export class Users {
   })
   rank: number | null;
 
-  @Column('datetime', {
-    name: 'timestamp',
-    nullable: true,
-    comment: '创建时间',
+  @Column("timestamp", {
+    name: "timestamp",
+    nullable: false,
+    comment: "创建时间",
+    default: () => 'CURRENT_TIMESTAMP',
   })
-  timestamp: Date | null;
+  timestamp: Date;
 
   @Column('longtext', { name: 'photo', nullable: true, comment: '照片' })
   photo: string | null;

@@ -21,11 +21,12 @@ export class Role {
   @Column("int", { name: "rank", nullable: true, comment: "排序" })
   rank: number | null;
 
-  @Column("datetime", {
+  @Column("timestamp", {
     name: "timestamp",
-    nullable: true,
+    nullable: false,
     comment: "创建时间",
+    default: () => 'CURRENT_TIMESTAMP',
   })
-  timestamp: Date | null;
+  timestamp: Date;
 
 }

@@ -19,21 +19,11 @@ export class Dynamictables {
   @Column("text", { name: "position", nullable: true, comment: "使用位置" })
   position: string | null;
 
-  @Column("varchar", {
-    name: "optime",
-    nullable: true,
-    comment: "操作时间",
-    length: 50,
-  })
-  optime: string | null;
-
-  @Column("text", { name: "remark", nullable: true, comment: "备注" })
-  remark: string | null;
-
-  @Column("datetime", {
+  @Column("timestamp", {
     name: "timestamp",
-    nullable: true,
+    nullable: false,
     comment: "创建时间",
+    default: () => 'CURRENT_TIMESTAMP',
   })
-  timestamp: Date | null;
+  timestamp: Date;
 }
