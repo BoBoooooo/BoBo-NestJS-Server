@@ -20,7 +20,7 @@ export class AdCodelistService extends BaseService<AdCodelist> {
       .innerJoin('ad_codelist_type', 'type', 'type.id = code.codeType');
     this.splitSql(qb, body);
     qb.select('code.*')
-      .addSelect('type.typeName')  // 此处返回字段为 type_typeName
+      .addSelect('type.typeName','typeName')  // 此处返回字段为 type_typeName
 
     const list = await qb.getRawMany();
     const total = await qb.getCount();

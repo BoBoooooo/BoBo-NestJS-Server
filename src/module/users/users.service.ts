@@ -41,8 +41,8 @@ export class UsersService extends BaseService<Users> {
       .innerJoin('role', 'role', 'role.id = users.roleid')
     this.splitSql(qb, body);
     qb.select('users.*')
-      .addSelect('dept.name',)  // 此处不定义alias 返回字段为 -> dept_name
-      .addSelect('role.roleName') // 同理返回-> role_roleName
+      .addSelect('dept.name','deptName')  // 此处不定义alias 返回字段为 -> dept_name
+      .addSelect('role.roleName','roleName') // 同理返回-> role_roleName
 
     const list = await qb.getRawMany();
     const total = await qb.getCount();
