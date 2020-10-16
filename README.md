@@ -27,15 +27,15 @@
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
 
-轻量级 `NestJS-API` 脚手架,欢迎 Star!
+🚀 轻量级 `NestJS-API` 脚手架,欢迎 Star!
 
-[配套前端地址](https://github.com/BoBoooooo/Anshare_Vue_Admin.git)
+🍌 [配套前端地址](https://github.com/BoBoooooo/Anshare_Vue_Admin.git)
 
-[swagger地址](http://server.boboooooo.top:7788/api/)
+🍉 [swagger地址](http://server.boboooooo.top:7788/api/)
 
-[socket.io测试地址](http://server.boboooooo.top:7788)
+🍏 [socket.io测试地址](http://server.boboooooo.top:7788)
 
-## Getting Start
+## 1. 开始使用
 
 * git clone https://github.com/BoBoooooo/NestJS-API-Server.git
 * npm install
@@ -46,9 +46,8 @@
     * `package.json->scripts->db`
     * `/src/config/env/*`
 * npm start
-* Enjoy !!
 
-## 目录结构
+## 2.目录结构
 
 ```bash
 ├── public                     # public
@@ -68,41 +67,33 @@
 ├── test                       # 测试
 ````
 
-## Features
+## 3. 功能
 
-- 登录模块、jwt 鉴权
+- 登录、JWT鉴权
 
   ```javascript
   全局jwt验证拦截 / src / guards / auth - guards.ts / src / app.module.ts;
   ```
 
-- socket.io
+- Socket.IO
 
-  ```javascript
-  默认socket.io监听8080端口 / src / events / events.gateway.ts;
+  默认Socket.IO监听8080端口 `/src/events/events.gateway.ts`
 
-  client端实现查看 / public / index.html;
-  ```
+  client端实现查看 `/public/index.html`
 
-- BaseController| BaseService 封装基础 CRUD 接口
+- `BaseController` `BaseService` 封装基础CRUD接口
+  - /xxx/add
+  - /xxx/update
+  - /xxx/delete
+  - /xxx/list
+  - /xxx/tree
+  - /xxx/detail
 
-``` javascript
-// 所有模块包含以下几种通用接口,详见 BaseService
- const enum = {
-    INSERT: 'add',  
-    UPDATE: 'update',
-    DELETE: 'delete',
-    SELECT: 'list',
-    TREE: 'tree',
-    DETAIL: 'detail',
- } 
-```
-
-- list 接口支持高级查询,具体实现查看 BaseService
+- list接口支持`高级查询`,具体实现查看`BaseService`
 
 ```javascript
+示例:
 curl - POST /users/list
-传参示例:
   {
     "searchCondition":[{
       "field":"userName",
@@ -118,34 +109,29 @@ curl - POST /users/list
     "pageSize":1,
     "orderCondition":"id desc"
   }
-
 ===
 最后生成的sql：
 select * from users where userName like '%ce%' and userName like '%shi%' order by id desc limit 1,1
 
 ```
 
-- 全局异常处理
-  ```javascript
-  //包含全局http异常处理以及全局all异常处理
-  /src/filter/{*.ts}
-  /src/main.ts
-  ```
+- 全局`http异常处理`以及`代码异常`处理
+  
 - log 日志
-  ```javascript
-  采用log4js / src / log / src / config / log4js.ts;
-  ```
-- 统一 api ResultBean 封装
+
+- HTTP返回值统一ResultBean封装
 
 - 文件上传,静态资源服务
 
 - 一键生成数据库模型 `npm run db`  (typeorm-model-generator)
 
-## 热更新
+## 4. 热更新
 
+```
 nest start --watch (auto reload project)
+```
 
-## 部署
+## 5. 部署
 
 ``` javascript
 // 项目提供了 /src/config/env/dev,prod,test 三种环境变量配置文件
@@ -165,7 +151,7 @@ PORT=3000 // 指定监听端口
 * 服务器上执行 npm install 安装所需依赖 (此处大坑,依赖并不会被打包到dist文件夹中)
 * npm run start:prod  /  npm run pm2
 
-## ToDo
+## 6. ToDo
 
 1. Redis 支持
 2. TypeOrm 多表查询
