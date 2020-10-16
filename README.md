@@ -27,23 +27,24 @@
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
 
-轻量级 nestjs-api 脚手架,欢迎 Star!
+轻量级 `NestJS-API` 脚手架,欢迎 Star!
 
-配套前端地址 https://github.com/BoBoooooo/Anshare_Vue_Admin.git
+[配套前端地址](https://github.com/BoBoooooo/Anshare_Vue_Admin.git)
 
-swagger地址 http://server.boboooooo.top:7788/api/
-socket.io测试地址 http://server.boboooooo.top:7788
+[swagger地址](http://server.boboooooo.top:7788/api/)
+
+[socket.io测试地址](http://server.boboooooo.top:7788)
 
 ## Getting Start
 
 * git clone https://github.com/BoBoooooo/NestJS-API-Server.git
 * npm install
 * 配置mysql数据库
-  * 新建数据库 nest 
-  * 导入 nest.sql
-  * 修改以下相关配置
-    * package.json->scripts->db
-    * /src/config/env/*
+  * 新建数据库 `nest`
+  * 导入 `nest.sql`
+  * 修改以下相关数据库配置
+    * `package.json->scripts->db`
+    * `/src/config/env/*`
 * npm start
 * Enjoy !!
 
