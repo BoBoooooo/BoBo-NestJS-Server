@@ -71,10 +71,6 @@
 
 - 登录、JWT鉴权
 
-  ```javascript
-  全局jwt验证拦截 / src / guards / auth - guards.ts / src / app.module.ts;
-  ```
-
 - Socket.IO
 
   默认Socket.IO监听8080端口 `/src/events/events.gateway.ts`
