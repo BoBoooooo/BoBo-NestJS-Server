@@ -5,7 +5,7 @@
  * @Date: 2020年08月10 11:45:59
  */
 import { BaseService } from './base.service';
-import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import { Body, Controller, Post, Query } from '@nestjs/common';
 import { ResultGenerator } from './../../core/resultBean';
 
 
@@ -50,6 +50,9 @@ export abstract class BaseController<T> {
     return ResultGenerator.success(await this.service.deleteByIds(id),'删除成功');
   }
 
+  /**
+   * tree 接口
+   */
   @Post('tree')
   public async tree(){
     return ResultGenerator.success(await this.service.tree())
