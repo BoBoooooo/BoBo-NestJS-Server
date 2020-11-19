@@ -4,7 +4,7 @@
  * @author: BoBo
  * @Date: 2020年09月15 14:16:42
  */
-import { join } from 'path';
+import { join } from 'path'
 
 export default {
   // 端口
@@ -20,8 +20,8 @@ export default {
     password: 'Anshare.cc',
     database: 'nest',
     charset: 'utf8mb4',
-    entities: [join(__dirname, '..','..', '/entities/*{.ts,.js}')],
+    entities: [join(__dirname, '..', '..', '/entities/*{.ts,.js}')],
     synchronize: true,
-    logging: true,
-  },
-};
+    logging: true
+  }
+}

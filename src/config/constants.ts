@@ -6,6 +6,5 @@
  */
 export const jwtConstants = {
   secret: 'shinobi7414', // 秘钥
-  time:'24h'
-};
-
+  time: '24h'
+}

@@ -1,6 +1,6 @@
-import { Controller, Get, Redirect } from '@nestjs/common';
-import { AppService } from './app.service';
-import { NoAuth } from './guards/customize';
+import { Controller, Get, Redirect } from '@nestjs/common'
+import { AppService } from './app.service'
+import { NoAuth } from './guards/customize'
 
 @Controller()
 export class AppController {
@@ -10,6 +10,6 @@ export class AppController {
   @Get()
   @Redirect('/public', 301)
   root(): string {
-    return '';
+    return ''
   }
 }

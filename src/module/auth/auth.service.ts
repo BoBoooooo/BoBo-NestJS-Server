@@ -1,50 +1,50 @@
-import { DeptService } from './../dept/dept.service';
-import { RoleService } from './../role/role.service';
-import { Users } from './../../entities/Users';
-import { UsersService } from '../users/users.service';
-import { Injectable } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
+import { DeptService } from './../dept/dept.service'
+import { RoleService } from './../role/role.service'
+import { Users } from './../../entities/Users'
+import { UsersService } from '../users/users.service'
+import { Injectable } from '@nestjs/common'
+import { JwtService } from '@nestjs/jwt'
 
 @Injectable()
 export class AuthService {
-  user;
+  user
   constructor(
     private readonly usersService: UsersService,
     private readonly roleService: RoleService,
     private readonly deptService: DeptService,
-    private readonly jwtService: JwtService,
+    private readonly jwtService: JwtService
   ) {}
 
   // 校验用户信息
   async validateUser(username: string, password: string): Promise<any> {
-    const user = await this.usersService.findByUserName(username);
+    const user = await this.usersService.findByUserName(username)
     if (user) {
       if (password === user.password) {
         // 密码正确
         return {
           code: 200,
-          user,
-        };
+          user
+        }
       } else {
         // 密码错误
         return {
           code: 800,
-          user: null,
-        };
+          user: null
+        }
       }
     }
     // 查无此人
     return {
       code: 801,
-      user: null,
-    };
+      user: null
+    }
   }
 
   // 签发jwt
   async certificate(user: Users) {
     // 查找当前用户角色/部门
-    const role = await this.roleService.findById(user.roleId);
-    const dept = await this.deptService.findById(user.deptId);
+    const role = await this.roleService.findById(user.roleId)
+    const dept = await this.deptService.findById(user.deptId)
 
     const payload = {
       userName: user.userName,
@@ -56,16 +56,16 @@ export class AuthService {
       deptName: dept.name,
       roleAuthName: role.roleAuthName,
       photo: user.photo
-    };
-    const token = this.jwtService.sign(payload);
+    }
+    const token = this.jwtService.sign(payload)
     this.user = {
       ...payload,
-      photo: user.photo,
-    };
-    return token;
+      photo: user.photo
+    }
+    return token
   }
 
   getUser() {
-    return this.user;
+    return this.user
   }
 }

@@ -1,32 +1,31 @@
-import { BaseService } from 'src/module/base/base.service';
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { AdCodelist } from 'src/entities/AdCodelist';
+import { BaseService } from 'src/module/base/base.service'
+import { Injectable } from '@nestjs/common'
+import { InjectRepository } from '@nestjs/typeorm'
+import { Repository } from 'typeorm'
+import { AdCodelist } from 'src/entities/AdCodelist'
 
 @Injectable()
 export class AdCodelistService extends BaseService<AdCodelist> {
-  adCodelistRepository: Repository<AdCodelist>;
+  adCodelistRepository: Repository<AdCodelist>
   constructor(
-    @InjectRepository(AdCodelist) adCodelistRepository: Repository<AdCodelist>,
+    @InjectRepository(AdCodelist) adCodelistRepository: Repository<AdCodelist>
   ) {
-    super(adCodelistRepository);
-    this.adCodelistRepository = adCodelistRepository;
+    super(adCodelistRepository)
+    this.adCodelistRepository = adCodelistRepository
   }
 
   async find(body) {
     const qb = this.adCodelistRepository
       .createQueryBuilder('code')
-      .innerJoin('ad_codelist_type', 'type', 'type.id = code.codeType');
-    this.splitSql(qb, body);
-    qb.select('code.*')
-      .addSelect('type.typeName','typeName')  // 此处返回字段为 type_typeName
+      .innerJoin('ad_codelist_type', 'type', 'type.id = code.codeType')
+    this.splitSql(qb, body)
+    qb.select('code.*').addSelect('type.typeName', 'typeName') // 此处返回字段为 type_typeName
 
-    const list = await qb.getRawMany();
-    const total = await qb.getCount();
+    const list = await qb.getRawMany()
+    const total = await qb.getCount()
     return {
       list,
-      total,
-    };
+      total
+    }
   }
 }

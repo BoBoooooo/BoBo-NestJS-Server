@@ -1,4 +1,4 @@
-import { Column, Entity, Index } from 'typeorm';
+import { Column, Entity, Index } from 'typeorm'
 
 @Index('index_id', ['id'], {})
 @Index('index_username', ['userName'], {})
@@ -6,54 +6,54 @@ import { Column, Entity, Index } from 'typeorm';
 @Entity('users', { schema: 'nest' })
 export class Users {
   @Column('varchar', { primary: true, name: 'id', length: 36 })
-  id: string;
+  id: string
 
   @Column('varchar', {
     name: 'userName',
     comment: '用户名',
     nullable: true,
-    length: 50,
+    length: 50
   })
-  userName: string | null;
+  userName: string | null
 
   @Column('varchar', { name: 'deptId', nullable: true, length: 36 })
-  deptId: string | null;
+  deptId: string | null
 
   @Column('varchar', { name: 'roleId', nullable: true, length: 36 })
-  roleId: string | null;
+  roleId: string | null
 
   @Column('varchar', {
     name: 'password',
     comment: '密码',
     nullable: true,
-    length: 50,
+    length: 50
   })
-  password: string | null;
+  password: string | null
 
   @Column('varchar', {
     name: 'realName',
     comment: '真实姓名',
     nullable: true,
-    length: 20,
+    length: 20
   })
-  realName: string | null;
+  realName: string | null
 
   @Column('int', {
     name: 'rank',
     comment: '排序码',
     nullable: true,
-    default: () => "'0'",
+    default: () => "'0'"
   })
-  rank: number | null;
+  rank: number | null
 
-  @Column("timestamp", {
-    name: "timestamp",
+  @Column('timestamp', {
+    name: 'timestamp',
     nullable: false,
-    comment: "创建时间",
-    default: () => 'CURRENT_TIMESTAMP',
+    comment: '创建时间',
+    default: () => 'CURRENT_TIMESTAMP'
   })
-  timestamp: Date;
+  timestamp: Date
 
   @Column('longtext', { name: 'photo', nullable: true, comment: '照片' })
-  photo: string | null;
+  photo: string | null
 }

@@ -1,57 +1,57 @@
-import { Column, Entity, Index } from "typeorm";
+import { Column, Entity, Index } from 'typeorm'
 
-@Index("index_vodevalue", ["codeValue"], {})
-@Entity("ad_codelist_type", { schema: "nest" })
+@Index('index_vodevalue', ['codeValue'], {})
+@Entity('ad_codelist_type', { schema: 'nest' })
 export class AdCodelistType {
-  @Column("varchar", { primary: true, name: "id", comment: "ID", length: 36 })
-  id: string;
+  @Column('varchar', { primary: true, name: 'id', comment: 'ID', length: 36 })
+  id: string
 
-  @Column("varchar", {
-    name: "codeValue",
+  @Column('varchar', {
+    name: 'codeValue',
     nullable: true,
-    comment: "字典类型名称",
-    length: 64,
+    comment: '字典类型名称',
+    length: 64
   })
-  codeValue: string | null;
+  codeValue: string | null
 
-  @Column("varchar", {
-    name: "typeName",
+  @Column('varchar', {
+    name: 'typeName',
     nullable: true,
-    comment: "字典类型描述",
-    length: 100,
+    comment: '字典类型描述',
+    length: 100
   })
-  typeName: string | null;
+  typeName: string | null
 
-  @Column("decimal", {
-    name: "codeOrder",
+  @Column('decimal', {
+    name: 'codeOrder',
     nullable: true,
-    comment: "排序",
+    comment: '排序',
     precision: 8,
-    scale: 0,
+    scale: 0
   })
-  codeOrder: string | null;
+  codeOrder: string | null
 
-  @Column("varchar", {
-    name: "remark",
+  @Column('varchar', {
+    name: 'remark',
     nullable: true,
-    comment: "备注",
-    length: 255,
+    comment: '备注',
+    length: 255
   })
-  remark: string | null;
+  remark: string | null
 
-  @Column("timestamp", {
-    name: "timestamp",
+  @Column('timestamp', {
+    name: 'timestamp',
     nullable: false,
-    comment: "创建时间",
-    default: () => 'CURRENT_TIMESTAMP',
+    comment: '创建时间',
+    default: () => 'CURRENT_TIMESTAMP'
   })
-  timestamp: Date;
+  timestamp: Date
 
-  @Column("varchar", {
-    name: "parentId",
+  @Column('varchar', {
+    name: 'parentId',
     nullable: true,
-    comment: "父级ID",
-    length: 36,
+    comment: '父级ID',
+    length: 36
   })
-  parentId: string | null;
+  parentId: string | null
 }

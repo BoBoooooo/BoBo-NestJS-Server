@@ -35,6 +35,7 @@
     "@nestjs/swagger": "^4.5.12",
     "@nestjs/typeorm": "^7.1.0",
     "@nestjs/websockets": "^7.4.2",
+    "@nestjs/serve-static": "^2.1.4",
     "compression": "^1.7.4",
     "dayjs": "^1.8.35",
     "helmet": "^4.0.0",
@@ -68,7 +69,10 @@
     "eslint": "7.1.0",
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-prettier": "^3.1.4",
+    "lint-staged": "^10.5.1",
     "jest": "26.0.1",
+    "husky": "^4.3.0",
     "prettier": "^1.19.1",
     "start-server-webpack-plugin": "^2.2.5",
     "supertest": "^4.0.2",
@@ -80,6 +84,18 @@
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
     "webpack-node-externals": "^2.5.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,ts}": [
+      "prettier --write",
+      "eslint --fix",
+      "git add"
+    ]
   },
   "jest": {
     "moduleFileExtensions": [

@@ -5,13 +5,13 @@
  * @Date: 2020年08月06 16:14:34
  */
 
-import * as path from 'path';
-const baseLogPath = path.resolve(__dirname, '../../logs'); // 日志要写入哪个目录
+import * as path from 'path'
+const baseLogPath = path.resolve(__dirname, '../../logs') // 日志要写入哪个目录
 
 const log4jsConfig = {
   appenders: {
     console: {
-      type: 'console', // 会打印到控制台
+      type: 'console' // 会打印到控制台
     },
     access: {
       type: 'dateFile', // 会写入文件，并按照日期分类
@@ -21,7 +21,7 @@ const log4jsConfig = {
       daysToKeep: 60,
       numBackups: 3,
       category: 'http',
-      keepFileExt: true, // 是否保留文件后缀
+      keepFileExt: true // 是否保留文件后缀
     },
     app: {
       type: 'dateFile',
@@ -30,14 +30,14 @@ const log4jsConfig = {
       layout: {
         type: 'pattern',
         pattern:
-          '{"date":"%d","level":"%p","category":"%c","host":"%h","pid":"%z","data":\'%m\'}',
+          '{"date":"%d","level":"%p","category":"%c","host":"%h","pid":"%z","data":\'%m\'}'
       },
       // 日志文件按日期（天）切割
       pattern: 'yyyyMMdd',
       daysToKeep: 60,
       // maxLogSize: 10485760,
       numBackups: 3,
-      keepFileExt: true,
+      keepFileExt: true
     },
     errorFile: {
       type: 'dateFile',
@@ -46,32 +46,32 @@ const log4jsConfig = {
       layout: {
         type: 'pattern',
         pattern:
-          '{"date":"%d","level":"%p","category":"%c","host":"%h","pid":"%z","data":\'%m\'}',
+          '{"date":"%d","level":"%p","category":"%c","host":"%h","pid":"%z","data":\'%m\'}'
       },
       // 日志文件按日期（天）切割
       pattern: 'yyyyMMdd',
       daysToKeep: 60,
       // maxLogSize: 10485760,
       numBackups: 3,
-      keepFileExt: true,
+      keepFileExt: true
     },
     errors: {
       type: 'logLevelFilter',
       level: 'ERROR',
-      appender: 'errorFile',
-    },
+      appender: 'errorFile'
+    }
   },
   categories: {
     default: {
       appenders: ['console', 'app', 'errors'],
-      level: 'DEBUG',
+      level: 'DEBUG'
     },
     info: { appenders: ['console', 'app', 'errors'], level: 'info' },
     access: { appenders: ['console', 'app', 'errors'], level: 'info' },
-    http: { appenders: ['access'], level: 'DEBUG' },
+    http: { appenders: ['access'], level: 'DEBUG' }
   },
   pm2: true, // 使用 pm2 来管理项目时，打开
-  pm2InstanceVar: 'INSTANCE_ID', // 会根据 pm2 分配的 id 进行区分，以免各进程在写日志时造成冲突
-};
+  pm2InstanceVar: 'INSTANCE_ID' // 会根据 pm2 分配的 id 进行区分，以免各进程在写日志时造成冲突
+}
 
-export default log4jsConfig;
+export default log4jsConfig

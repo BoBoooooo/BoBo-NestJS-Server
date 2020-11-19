@@ -4,7 +4,7 @@
  * @author: BoBo
  * @Date: 2020年09月15 14:16:42
  */
-import { join } from 'path';
+import { join } from 'path'
 
 export default {
   // 端口
@@ -20,10 +20,9 @@ export default {
     password: 'Anshare.cc',
     database: 'nest',
     charset: 'utf8mb4',
-    entities: [join(__dirname, '..','..', '/entities/*{.ts,.js}')],
+    entities: [join(__dirname, '..', '..', '/entities/*{.ts,.js}')],
     synchronize: false, // 是否在每次应用程序启动时自动创建数据库架构
-    logging: true, 
-    dateStrings: true, // 强制日期类型（TIMESTAMP，DATETIME，DATE）作为字符串返回，而不是转换为 JavaScript Date 对象
-
-  },
-};
+    logging: true,
+    dateStrings: true // 强制日期类型（TIMESTAMP，DATETIME，DATE）作为字符串返回，而不是转换为 JavaScript Date 对象
+  }
+}

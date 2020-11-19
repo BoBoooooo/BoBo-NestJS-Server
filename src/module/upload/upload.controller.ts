@@ -4,17 +4,16 @@
  * @author: BoBo
  * @Date: 2020年08月10 15:47:05
  */
-import { Post, Controller, UploadedFile, UseInterceptors, Body } from '@nestjs/common';
-import { FileInterceptor } from '@nestjs/platform-express';
-import { UploadService } from './upload.service';
+import { Post, Controller, UploadedFile, UseInterceptors } from '@nestjs/common'
+import { FileInterceptor } from '@nestjs/platform-express'
 
 @Controller('file')
 @UseInterceptors(FileInterceptor('file'))
 export class UploadController {
-    constructor(private readonly uploadFileService: UploadService) {}
-    @Post('/upload')
-    uploadFile(@UploadedFile() file, @Body() body): any {
-        // 
-        return file
-    }
+  constructor() {}
+  @Post('/upload')
+  uploadFile(@UploadedFile() file): any {
+    //
+    return file
+  }
 }
