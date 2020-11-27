@@ -14,7 +14,7 @@
     "start:debug": "nest start --debug --watch",
     "start:prod": "cross-env NODE_ENV=production && PORT=3000 node dist/main",
     "start:test": "cross-env NODE_ENV=test && cross-env NODE_ENV=test && node dist/main",
-    "pm2": "PORT=3000 pm2 start --name nest dist/main.js --env production",
+    "pm2": "PORT=7788 pm2 start --name nest dist/main.js --env production",
     "db": "rm -rf src/entities & npx typeorm-model-generator -h localhost -d nest -p 3306 -u root -x Anshare.cc -e mysql -o src/entities --noConfig true --ce pascal --cp camel",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest",
