@@ -1,3 +1,4 @@
+import { PersonModule } from './module/person/person.module'
 import { DynamictablesModule } from './module/dynamictables/dynamictables.module'
 import { FormModule } from './module/form/form.module'
 import { AdCodelistModule } from './module/ad-codelist/ad-codelist.module'
@@ -40,6 +41,7 @@ import { AdCodelistTypeModule } from './module/ad-codelist-type/ad-codelist-type
     UsersModule,
     UploadModule,
     RoleModule,
+    PersonModule,
     AdCodelistModule,
     AdCodelistTypeModule,
     FormModule,

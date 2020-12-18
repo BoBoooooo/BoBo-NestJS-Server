@@ -13,7 +13,6 @@ import { TransformInterceptor } from './interceptor/transform.interceptor'
 import { AllExceptionsFilter } from './filter/any-exception.filter'
 import * as compression from 'compression'
 import { HttpExceptionFilter } from './filter/http-exception.filter'
-// import  * as helmet from 'helmet';
 
 declare const module: any
 
