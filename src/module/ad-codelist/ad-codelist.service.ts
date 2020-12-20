@@ -19,7 +19,9 @@ export class AdCodelistService extends BaseService<AdCodelist> {
       .createQueryBuilder('code')
       .innerJoin('ad_codelist_type', 'type', 'type.id = code.codeType')
     this.splitSql(qb, body)
-    qb.select('code.*').addSelect('type.typeName', 'typeName') // 此处返回字段为 type_typeName
+    qb.select('code.*')
+      .addSelect('type.typeName', 'typeName')
+      .addOrderBy('code.codeOrder', 'ASC') // 此处返回字段为 type_typeName
 
     const list = await qb.getRawMany()
     const total = await qb.getCount()
