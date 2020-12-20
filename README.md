@@ -120,14 +120,7 @@ select * from users where userName like '%ce%' and userName like '%shi%' order b
 - 文件上传,静态资源服务
 
 - 一键生成数据库模型 `npm run db`  (typeorm-model-generator)
-
-## 4. 热更新
-
-```
-nest start --watch (auto reload project)
-```
-
-## 5. 部署
+## 4. 部署
 
 ``` javascript
 // 项目提供了 /src/config/env/dev,prod,test 三种环境变量配置文件
@@ -146,8 +139,3 @@ PORT=3000 // 指定监听端口
 * 拷贝package.json
 * 服务器上执行 npm install 安装所需依赖 (此处大坑,依赖并不会被打包到dist文件夹中)
 * npm run start:prod  /  npm run pm2
-
-## 6. ToDo
-
-1. Redis 支持
-2. TypeOrm 多表查询

@@ -63,4 +63,44 @@ export class Person {
     length: 255
   })
   jobno: string | null
+
+  @Column('varchar', {
+    name: 'education',
+    nullable: true,
+    comment: '文化程度',
+    length: 255
+  })
+  education: string | null
+
+  @Column('varchar', {
+    name: 'major',
+    nullable: true,
+    comment: '专业',
+    length: 255
+  })
+  major: string | null
+
+  @Column('varchar', {
+    name: 'mobile',
+    nullable: true,
+    comment: '联系方式',
+    length: 100
+  })
+  mobile: string | null
+
+  @Column('varchar', {
+    name: 'birthdate',
+    nullable: true,
+    comment: '出生年月',
+    length: 100
+  })
+  birthdate: string | null
+
+  @Column('varchar', {
+    name: 'sex',
+    nullable: true,
+    comment: '性别',
+    length: 10
+  })
+  sex: string | null
 }
