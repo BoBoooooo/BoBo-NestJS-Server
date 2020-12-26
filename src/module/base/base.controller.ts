@@ -1,6 +1,6 @@
 /*
  * @file: BaseController
- * @copyright: NanJing Anshare Tech .Com
+ * @copyright: BoBo
  * @author: BoBo
  * @Date: 2020年08月10 11:45:59
  */

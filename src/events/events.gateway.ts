@@ -1,6 +1,6 @@
 /*
  * @file: webSocket https://docs.nestjs.cn/6/websockets?id=websocket
- * @copyright: NanJing Anshare Tech .Com
+ * @copyright: BoBo
  * @author: BoBo
  * @Date: 2020年08月13 16:48:08
  */

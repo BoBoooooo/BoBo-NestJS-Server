@@ -1,6 +1,6 @@
 /*
  * @file: BaseService
- * @copyright: NanJing Anshare Tech .Com
+ * @copyright: BoBo
  * @author: BoBo
  * @Date: 2020年08月10 10:44:35
  */

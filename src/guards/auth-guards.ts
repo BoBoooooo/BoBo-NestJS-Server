@@ -1,7 +1,7 @@
 /*
  * @file: 全局jwt guard
           接口上添加@NoAuth() 则跳过校验
- * @copyright: NanJing Anshare Tech .Com
+ * @copyright: BoBo
  * @author: BoBo
  * @Date: 2020年08月07 14:53:52
  */

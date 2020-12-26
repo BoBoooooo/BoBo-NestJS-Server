@@ -1,6 +1,6 @@
 /*
  * @file:  全局异常拦截  http exception -> any exception
- * @copyright: NanJing Anshare Tech .Com
+ * @copyright: BoBo
  * @author: BoBo
  * @Date: 2020年08月06 16:57:04
  */

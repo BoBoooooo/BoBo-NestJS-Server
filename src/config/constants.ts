@@ -1,6 +1,6 @@
 /*
  * @file: 设置jwt相关参数
- * @copyright: NanJing Anshare Tech .Com
+ * @copyright: BoBo
  * @author: BoBo
  * @Date: 2020年08月06 16:10:49
  */

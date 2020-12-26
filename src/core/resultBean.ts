@@ -1,6 +1,6 @@
 /*
  * @file: ResultBean
- * @copyright: NanJing Anshare Tech .Com
+ * @copyright: BoBo
  * @author: BoBo
  * @Date: 2020年08月10 15:56:42
  */

@@ -3,7 +3,7 @@ import { ValueTransformer } from 'typeorm'
 /*
  * @file: typeorm bit(1) => 转换为 true false
           https://github.com/typeorm/typeorm/issues/3875
- * @copyright: NanJing Anshare Tech .Com
+ * @copyright: BoBo
  * @author: BoBo
  * @Date: 2020年09月07 10:59:00
  */

@@ -1,6 +1,6 @@
 /*
  * @file: main.ts
- * @copyright: NanJing Anshare Tech .Com
+ * @copyright: BoBo
  * @author: BoBo
  * @Date: 2020年08月06 16:10:49
  */
@@ -24,7 +24,7 @@ async function bootstrap() {
   // helmet安全
   // app.use(helmet());
   const options = new DocumentBuilder()
-    .setTitle('Anshare Swagger')
+    .setTitle('Nestjs Swagger')
     .setDescription('API description')
     .setVersion('1.0')
     .addTag('cats')
