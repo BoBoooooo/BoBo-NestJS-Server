@@ -1,35 +1,26 @@
-import { Column, Entity, Index } from 'typeorm'
+import { Column, Entity } from 'typeorm'
 
-@Index('index_vodevalue', ['codeValue'], {})
 @Entity('ad_codelist_type', { schema: 'nest' })
 export class AdCodelistType {
   @Column('varchar', { primary: true, name: 'id', comment: 'ID', length: 36 })
   id: string
 
   @Column('varchar', {
-    name: 'codeValue',
-    nullable: true,
-    comment: '字典类型名称',
-    length: 64
-  })
-  codeValue: string | null
-
-  @Column('varchar', {
     name: 'typeName',
     nullable: true,
-    comment: '字典类型描述',
+    comment: '字典类型名称',
     length: 100
   })
   typeName: string | null
 
   @Column('decimal', {
-    name: 'codeOrder',
+    name: 'order',
     nullable: true,
     comment: '排序',
     precision: 8,
     scale: 0
   })
-  codeOrder: string | null
+  order: string | null
 
   @Column('varchar', {
     name: 'remark',

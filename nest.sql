@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : localhost
+ Source Server         : localhost_3306
  Source Server Type    : MySQL
- Source Server Version : 80022
+ Source Server Version : 80021
  Source Host           : localhost:3306
  Source Schema         : nest
 
  Target Server Type    : MySQL
- Target Server Version : 80022
+ Target Server Version : 80021
  File Encoding         : 65001
 
- Date: 09/01/2021 12:40:27
+ Date: 12/01/2021 17:13:03
 */
 
 SET NAMES utf8mb4;
@@ -62,26 +62,24 @@ COMMIT;
 DROP TABLE IF EXISTS `ad_codelist_type`;
 CREATE TABLE `ad_codelist_type` (
   `id` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'ID',
-  `codeValue` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '字典类型名称',
-  `typeName` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '字典类型描述',
-  `codeOrder` decimal(8,0) DEFAULT NULL COMMENT '排序',
+  `typeName` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '字典类型名称',
+  `order` decimal(8,0) DEFAULT NULL COMMENT '排序',
   `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '备注',
   `parentId` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '父级ID',
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  PRIMARY KEY (`id`) USING BTREE,
-  KEY `index_vodevalue` (`codeValue`) USING BTREE
+  PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='字典类型表';
 
 -- ----------------------------
 -- Records of ad_codelist_type
 -- ----------------------------
 BEGIN;
-INSERT INTO `ad_codelist_type` VALUES ('01eb097e-0d94-44cf-8796-157bba54f0bb', '性别', '性别', 1, '', 'bedac4aa-41c8-4fcd-911d-d79b3b5a2392', '2020-09-17 10:31:39');
-INSERT INTO `ad_codelist_type` VALUES ('962e3a39-928d-4470-a9f3-8efda17f2692', '文化程度', '文化程度', 0, '', 'bedac4aa-41c8-4fcd-911d-d79b3b5a2392', '2020-12-20 10:56:28');
-INSERT INTO `ad_codelist_type` VALUES ('ac3f1996-bcec-4604-b465-eaf5d1208e79', '职级', '职级', 0, '', 'bedac4aa-41c8-4fcd-911d-d79b3b5a2392', '2020-12-20 10:57:39');
-INSERT INTO `ad_codelist_type` VALUES ('bedac4aa-41c8-4fcd-911d-d79b3b5a2392', '常用', '常用', 0, '常用', 'fe980574-2552-4754-88c8-366eb5a22861', '2020-09-17 10:31:39');
-INSERT INTO `ad_codelist_type` VALUES ('f844cb90-1738-4013-b9f2-b0755b63b9dc', '系统配置', '系统配置', 0, '系统相关', 'fe980574-2552-4754-88c8-366eb5a22861', '2020-09-17 10:31:39');
-INSERT INTO `ad_codelist_type` VALUES ('fe980574-2552-4754-88c8-366eb5a22861', '数据字典', '数据字典', 1, '', '0', '2020-09-17 10:31:39');
+INSERT INTO `ad_codelist_type` VALUES ('01eb097e-0d94-44cf-8796-157bba54f0bb', '性别', 1, '', 'bedac4aa-41c8-4fcd-911d-d79b3b5a2392', '2020-09-17 10:31:39');
+INSERT INTO `ad_codelist_type` VALUES ('962e3a39-928d-4470-a9f3-8efda17f2692', '文化程度', 0, '', 'bedac4aa-41c8-4fcd-911d-d79b3b5a2392', '2020-12-20 10:56:28');
+INSERT INTO `ad_codelist_type` VALUES ('ac3f1996-bcec-4604-b465-eaf5d1208e79', '职级', 0, '', 'bedac4aa-41c8-4fcd-911d-d79b3b5a2392', '2020-12-20 10:57:39');
+INSERT INTO `ad_codelist_type` VALUES ('bedac4aa-41c8-4fcd-911d-d79b3b5a2392', '常用', 0, '常用', 'fe980574-2552-4754-88c8-366eb5a22861', '2021-01-12 17:09:06');
+INSERT INTO `ad_codelist_type` VALUES ('f844cb90-1738-4013-b9f2-b0755b63b9dc', '系统配置', 2, '系统相关', 'fe980574-2552-4754-88c8-366eb5a22861', '2021-01-12 17:09:16');
+INSERT INTO `ad_codelist_type` VALUES ('fe980574-2552-4754-88c8-366eb5a22861', '数据字典', 1, '', '0', '2020-09-17 10:31:39');
 COMMIT;
 
 -- ----------------------------
@@ -127,7 +125,7 @@ INSERT INTO `dynamictables` VALUES ('054cfb12-7db2-400b-9917-27d3105dbb09', 'dep
 INSERT INTO `dynamictables` VALUES ('3be21467-5c60-42eb-81ae-2e7bb81b6d64', 'person_resume', '{\"columns\":[{\"prop\":\"time\",\"label\":\"起止时间\",\"minWidth\":140,\"align\":\"center\",\"headerAlign\":\"center\",\"showOverflowTooltip\":true,\"sortable\":\"custom\",\"slotName\":\"\",\"searchable\":true},{\"prop\":\"workunit\",\"label\":\"工作单位\",\"align\":\"center\",\"headerAlign\":\"center\",\"showOverflowTooltip\":true,\"minWidth\":140,\"sortable\":\"custom\",\"searchable\":true},{\"prop\":\"workduty\",\"label\":\"职务\",\"align\":\"center\",\"headerAlign\":\"center\",\"showOverflowTooltip\":true,\"minWidth\":140,\"sortable\":\"custom\",\"searchable\":true},{\"prop\":\"\",\"label\":\"操作\",\"minWidth\":180,\"align\":\"center\",\"headerAlign\":\"center\",\"slotName\":\"actionColumn\",\"fixed\":\"right\",\"sortable\":\"false\",\"searchable\":false}]}', '员工履历', '2020-12-20 10:37:25');
 INSERT INTO `dynamictables` VALUES ('58da681b-af8f-4733-b7b0-9c037e9d0d8f', 'users', '{\"columns\":[{\"prop\":\"realName\",\"label\":\"姓名\",\"minWidth\":\"100\",\"sortable\":\"custom\",\"slotName\":\"\",\"searchable\":true,\"align\":\"center\",\"headerAlign\":\"center\",\"showOverflowTooltip\":true},{\"prop\":\"userName\",\"label\":\"登录名\",\"minWidth\":\"100\",\"sortable\":\"custom\",\"slotName\":\"\",\"searchable\":true,\"align\":\"center\",\"headerAlign\":\"center\",\"showOverflowTooltip\":true},{\"prop\":\"roleName\",\"label\":\"角色\",\"minWidth\":\"100\",\"sortable\":\"custom\",\"slotName\":\"\",\"option\":{\"width\":\"\",\"placeholder\":\"\",\"remote\":\"custom\",\"remoteFunc\":\"funcGetRole\",\"props\":{\"label\":\"label\",\"value\":\"value\"},\"type\":\"select\",\"selectBy\":\"label\"},\"searchable\":true,\"align\":\"center\",\"headerAlign\":\"center\",\"showOverflowTooltip\":true},{\"prop\":\"deptName\",\"label\":\"部门\",\"minWidth\":\"100\",\"sortable\":\"custom\",\"searchable\":true,\"align\":\"center\",\"headerAlign\":\"center\",\"showOverflowTooltip\":true},{\"prop\":\"photo\",\"label\":\"头像\",\"align\":\"center\",\"headerAlign\":\"center\",\"showOverflowTooltip\":true,\"minWidth\":140,\"sortable\":\"custom\",\"searchable\":false,\"slotName\":\"columnFormatter\"},{\"prop\":\"\",\"label\":\"操作\",\"minWidth\":\"270\",\"slotName\":\"actionColumn\",\"fixed\":\"right\",\"sortable\":\"false\",\"searchable\":false,\"align\":\"center\",\"headerAlign\":\"center\"}],\"name\":\"users\",\"position\":\"Users.vue系统设置/角色管理\"}', 'Users.vue系统设置/角色管理', '2021-01-08 09:16:22');
 INSERT INTO `dynamictables` VALUES ('72269942-3b4a-4000-b722-12c70febbab2', 'params', '{\"columns\":[{\"prop\":\"codeName\",\"label\":\"参数名称\",\"align\":\"center\",\"headerAlign\":\"center\",\"showOverflowTooltip\":true,\"minWidth\":140,\"sortable\":\"custom\",\"searchable\":true},{\"prop\":\"remark\",\"label\":\"参数键名\",\"align\":\"center\",\"headerAlign\":\"center\",\"showOverflowTooltip\":true,\"minWidth\":140,\"sortable\":\"custom\",\"searchable\":true},{\"prop\":\"codeValue\",\"label\":\"参数键值\",\"align\":\"center\",\"headerAlign\":\"center\",\"showOverflowTooltip\":true,\"minWidth\":140,\"sortable\":\"custom\",\"searchable\":true},{\"prop\":\"\",\"label\":\"操作\",\"minWidth\":180,\"align\":\"center\",\"headerAlign\":\"center\",\"slotName\":\"actionColumn\",\"fixed\":\"right\",\"sortable\":\"false\",\"searchable\":false}]}', '参数设置', '2020-09-17 10:15:02');
-INSERT INTO `dynamictables` VALUES ('e2d577ac-6900-432f-a45c-ec086f668825', 'person', '{\"columns\":[{\"prop\":\"jobno\",\"label\":\"工号\",\"minWidth\":\"100\",\"align\":\"center\",\"headerAlign\":\"center\",\"showOverflowTooltip\":true,\"sortable\":\"custom\",\"slotName\":\"jobno\",\"searchable\":true},{\"prop\":\"personname\",\"label\":\"姓名\",\"minWidth\":\"70\",\"align\":\"center\",\"headerAlign\":\"center\",\"showOverflowTooltip\":true,\"sortable\":\"custom\",\"slotName\":\"personname\",\"searchable\":true},{\"prop\":\"jobtime\",\"label\":\"入职时间\",\"minWidth\":140,\"align\":\"center\",\"headerAlign\":\"center\",\"showOverflowTooltip\":true,\"sortable\":\"custom\",\"slotName\":\"\",\"searchable\":true},{\"prop\":\"deptname\",\"label\":\"所在部门\",\"minWidth\":\"100\",\"align\":\"center\",\"headerAlign\":\"center\",\"showOverflowTooltip\":true,\"sortable\":\"custom\",\"slotName\":\"\",\"searchable\":true},{\"prop\":\"post\",\"label\":\"岗位\",\"minWidth\":\"100\",\"align\":\"center\",\"headerAlign\":\"center\",\"showOverflowTooltip\":true,\"sortable\":\"custom\",\"slotName\":\"\",\"searchable\":true},{\"prop\":\"level\",\"label\":\"职级\",\"minWidth\":\"100\",\"align\":\"center\",\"headerAlign\":\"center\",\"showOverflowTooltip\":true,\"sortable\":\"custom\",\"slotName\":\"\",\"searchable\":true},{\"prop\":\"mobile\",\"label\":\"联系方式\",\"minWidth\":140,\"align\":\"center\",\"headerAlign\":\"center\",\"showOverflowTooltip\":true,\"sortable\":\"custom\",\"slotName\":\"\",\"searchable\":true},{\"prop\":\"\",\"label\":\"操作\",\"minWidth\":\"240\",\"align\":\"center\",\"headerAlign\":\"center\",\"slotName\":\"actionColumn\",\"fixed\":\"right\",\"sortable\":\"false\",\"searchable\":false}]}', '员工管理', '2020-12-20 11:22:02');
+INSERT INTO `dynamictables` VALUES ('e2d577ac-6900-432f-a45c-ec086f668825', 'person', '{\"columns\":[{\"prop\":\"jobno\",\"label\":\"工号\",\"minWidth\":\"100\",\"align\":\"center\",\"headerAlign\":\"center\",\"showOverflowTooltip\":true,\"sortable\":\"custom\",\"slotName\":\"jobno\",\"searchable\":true},{\"prop\":\"personname\",\"label\":\"姓名\",\"minWidth\":\"70\",\"align\":\"center\",\"headerAlign\":\"center\",\"showOverflowTooltip\":true,\"sortable\":\"custom\",\"slotName\":\"personname\",\"searchable\":true},{\"prop\":\"jobtime\",\"label\":\"入职时间\",\"minWidth\":140,\"align\":\"center\",\"headerAlign\":\"center\",\"showOverflowTooltip\":true,\"sortable\":\"custom\",\"slotName\":\"\",\"searchable\":true},{\"prop\":\"deptname\",\"label\":\"所在部门\",\"minWidth\":\"100\",\"align\":\"center\",\"headerAlign\":\"center\",\"showOverflowTooltip\":true,\"sortable\":\"custom\",\"slotName\":\"\",\"searchable\":true},{\"prop\":\"post\",\"label\":\"岗位\",\"minWidth\":\"100\",\"align\":\"center\",\"headerAlign\":\"center\",\"showOverflowTooltip\":true,\"sortable\":\"custom\",\"slotName\":\"\",\"searchable\":true},{\"prop\":\"level\",\"label\":\"职级\",\"minWidth\":\"100\",\"align\":\"center\",\"headerAlign\":\"center\",\"showOverflowTooltip\":true,\"sortable\":\"custom\",\"slotName\":\"\",\"searchable\":true,\"option\":{\"remote\":\"dict\",\"remoteFunc\":\"\",\"type\":\"select\",\"props\":{\"value\":\"\",\"label\":\"\"},\"dictType\":\"ac3f1996-bcec-4604-b465-eaf5d1208e79\"}},{\"prop\":\"mobile\",\"label\":\"联系方式\",\"minWidth\":140,\"align\":\"center\",\"headerAlign\":\"center\",\"showOverflowTooltip\":true,\"sortable\":\"custom\",\"slotName\":\"\",\"searchable\":true},{\"prop\":\"\",\"label\":\"操作\",\"minWidth\":\"240\",\"align\":\"center\",\"headerAlign\":\"center\",\"slotName\":\"actionColumn\",\"fixed\":\"right\",\"sortable\":\"false\",\"searchable\":false}],\"name\":\"person\",\"position\":\"员工管理\"}', '员工管理', '2021-01-12 17:02:22');
 INSERT INTO `dynamictables` VALUES ('eb9388de-aa0c-4027-8653-b4e0c9a9cb1d', 'ad_codelist', '{\"columns\":[{\"prop\":\"codeName\",\"label\":\"字典名\",\"minWidth\":140,\"align\":\"left\",\"headerAlign\":\"center\",\"showOverflowTooltip\":true,\"sortable\":\"custom\",\"slotName\":\"\",\"searchable\":true},{\"prop\":\"codeValue\",\"label\":\"字典值\",\"minWidth\":140,\"align\":\"left\",\"headerAlign\":\"center\",\"showOverflowTooltip\":true,\"sortable\":\"custom\",\"slotName\":\"\",\"searchable\":true},{\"prop\":\"typeName\",\"label\":\"所属分类\",\"minWidth\":140,\"align\":\"center\",\"headerAlign\":\"center\",\"showOverflowTooltip\":true,\"sortable\":\"custom\",\"slotName\":\"\",\"searchable\":true,\"option\":{\"width\":\"\",\"placeholder\":\"\",\"remote\":\"custom\",\"remoteFunc\":\"getDictType\",\"props\":{\"value\":\"value\",\"label\":\"label\"},\"options\":[{\"value\":\"下拉框1\"},{\"value\":\"下拉框2\"},{\"value\":\"下拉框3\"}],\"type\":\"select\",\"selectBy\":\"label\"}},{\"prop\":\"codeOrder\",\"label\":\"字典排序\",\"minWidth\":140,\"align\":\"center\",\"headerAlign\":\"center\",\"showOverflowTooltip\":true,\"sortable\":\"custom\",\"slotName\":\"\",\"searchable\":true},{\"prop\":\"remark\",\"label\":\"备注\",\"minWidth\":140,\"align\":\"center\",\"headerAlign\":\"center\",\"showOverflowTooltip\":true,\"sortable\":\"custom\",\"slotName\":\"\",\"searchable\":true},{\"prop\":\"\",\"label\":\"操作\",\"minWidth\":180,\"align\":\"center\",\"headerAlign\":\"center\",\"slotName\":\"actionColumn\",\"fixed\":\"right\",\"sortable\":\"false\",\"searchable\":false}]}', '字典管理', '2020-12-20 11:05:38');
 INSERT INTO `dynamictables` VALUES ('f2ad95ae-61d7-4bc3-94d6-dc00e867fdbe', 'dynamictables', '{\"columns\":[{\"prop\":\"tableName\",\"label\":\"表名\",\"minWidth\":140,\"sortable\":\"custom\",\"slotName\":\"\",\"searchable\":true,\"align\":\"left\",\"headerAlign\":\"center\"},{\"prop\":\"position\",\"label\":\"使用位置\",\"minWidth\":\"300\",\"sortable\":\"custom\",\"slotName\":\"\",\"searchable\":true,\"align\":\"left\",\"headerAlign\":\"center\"},{\"prop\":\"timestamp\",\"label\":\"更新时间\",\"minWidth\":140,\"sortable\":\"custom\",\"searchable\":true,\"align\":\"center\",\"headerAlign\":\"center\"},{\"prop\":\"\",\"label\":\"操作\",\"minWidth\":\"150\",\"slotName\":\"actionColumn\",\"fixed\":\"right\",\"sortable\":\"false\",\"searchable\":false,\"align\":\"center\",\"headerAlign\":\"center\",\"width\":\"200\"}]}', 'TableDesigner.vue开发人员工具/表格设计', '2020-09-17 10:15:02');
 INSERT INTO `dynamictables` VALUES ('fb8a5d7c-2fda-4936-9da0-dc09354adfdc', 'form', '{\"columns\":[{\"prop\":\"tableName\",\"label\":\"表名\",\"minWidth\":140,\"sortable\":\"custom\",\"searchable\":true,\"align\":\"left\",\"headerAlign\":\"center\"},{\"prop\":\"position\",\"label\":\"使用位置\",\"minWidth\":\"300\",\"sortable\":\"custom\",\"searchable\":true,\"align\":\"left\",\"headerAlign\":\"center\"},{\"prop\":\"timestamp\",\"label\":\"更新时间\",\"minWidth\":140,\"sortable\":\"custom\",\"searchable\":true,\"align\":\"center\",\"headerAlign\":\"center\"},{\"prop\":\"\",\"label\":\"操作\",\"minWidth\":\"150\",\"slotName\":\"actionColumn\",\"fixed\":\"right\",\"sortable\":\"false\",\"searchable\":false,\"align\":\"center\",\"headerAlign\":\"center\"}]}', 'FormDesigner.vue开发人员工具/表单设计', '2020-09-18 10:14:02');
@@ -166,20 +164,20 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS `person`;
 CREATE TABLE `person` (
-  `id` char(36) COLLATE utf8mb4_general_ci NOT NULL COMMENT '主键',
-  `personname` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '姓名',
-  `deptname` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '所在部门',
-  `salary` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '薪资',
-  `post` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '岗位',
-  `level` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '职级',
+  `id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '主键',
+  `personname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '姓名',
+  `deptname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '所在部门',
+  `salary` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '薪资',
+  `post` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '岗位',
+  `level` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '职级',
   `timestamp` datetime DEFAULT NULL COMMENT '时间戳',
-  `jobtime` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '入职时间',
-  `jobno` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '工号',
-  `education` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '文化程度',
-  `major` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '专业',
+  `jobtime` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '入职时间',
+  `jobno` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '工号',
+  `education` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '文化程度',
+  `major` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '专业',
   `mobile` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '联系方式',
-  `birthdate` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '出生年月',
-  `sex` varchar(10) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '性别',
+  `birthdate` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '出生年月',
+  `sex` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '性别',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -272,12 +270,12 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS `person_resume`;
 CREATE TABLE `person_resume` (
-  `id` char(36) COLLATE utf8mb4_general_ci NOT NULL,
-  `personid` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `time` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '起止时间',
-  `workunit` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '工作单位',
-  `workduty` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '职务',
-  `remark` text COLLATE utf8mb4_general_ci COMMENT '备注',
+  `id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `personid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `time` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '起止时间',
+  `workunit` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '工作单位',
+  `workduty` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '职务',
+  `remark` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci COMMENT '备注',
   `timestamp` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
