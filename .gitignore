@@ -1,7 +1,7 @@
 # compiled output
 /dist
 /node_modules
-/upload
+/public/affix
 # Logs
 logs
 *.log

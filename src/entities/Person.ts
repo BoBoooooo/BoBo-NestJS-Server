@@ -103,4 +103,12 @@ export class Person {
     length: 10
   })
   sex: string | null
+
+  @Column('varchar', {
+    name: 'avatar',
+    nullable: true,
+    comment: '头像',
+    length: 255
+  })
+  avatar: string | null
 }

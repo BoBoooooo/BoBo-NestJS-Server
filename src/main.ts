@@ -5,6 +5,7 @@
  * @Date: 2020年08月06 16:10:49
  */
 import { NestFactory } from '@nestjs/core'
+import { NestExpressApplication } from '@nestjs/platform-express'
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger'
 import { AppModule } from './app.module'
 import { logger } from './middleware/logger.middleware'
@@ -13,11 +14,14 @@ import { TransformInterceptor } from './interceptor/transform.interceptor'
 import { AllExceptionsFilter } from './filter/any-exception.filter'
 import * as compression from 'compression'
 import { HttpExceptionFilter } from './filter/http-exception.filter'
+import { join } from 'path'
 
 declare const module: any
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { cors: true })
+  const app = await NestFactory.create<NestExpressApplication>(AppModule, {
+    cors: true
+  })
   app.enableCors({
     origin: true
   })
@@ -43,6 +47,14 @@ async function bootstrap() {
   app.use(compression())
 
   app.useGlobalFilters(new HttpExceptionFilter())
+
+  // 配置静态资源
+  app.useStaticAssets(join(__dirname, '../public', '/'), {
+    prefix: '/',
+    setHeaders: res => {
+      res.set('Cache-Control', 'max-age=2592000')
+    }
+  })
 
   await app.listen(process.env.PORT || 7788)
 }

@@ -13,7 +13,7 @@ const path = require('path')
     MulterModule.register({
       storage: diskStorage({
         //自定义路径,此处默认保存在项目根目录下的upload文件夹
-        destination: path.resolve(`upload/${dayjs().format('YYYY-MM-DD')}`),
+        destination: path.join(__dirname, '../../../public/affix', '/'),
         filename: (req, file, cb) => {
           // 自定义文件名
           const filename = `${guid.v4()}.${file.mimetype.split('/')[1]}`

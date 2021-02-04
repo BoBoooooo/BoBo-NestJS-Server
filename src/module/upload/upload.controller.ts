@@ -6,14 +6,15 @@
  */
 import { Post, Controller, UploadedFile, UseInterceptors } from '@nestjs/common'
 import { FileInterceptor } from '@nestjs/platform-express'
+import { ResultGenerator } from 'src/core/resultBean'
+import { ResultBean } from './../../core/resultBean'
 
 @Controller('file')
 @UseInterceptors(FileInterceptor('file'))
 export class UploadController {
   constructor() {}
   @Post('/upload')
-  uploadFile(@UploadedFile() file): any {
-    //
-    return file
+  uploadFile(@UploadedFile() file): ResultBean {
+    return ResultGenerator.success('/affix/' + file.filename, '上传成功')
   }
 }
