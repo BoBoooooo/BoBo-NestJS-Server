@@ -43,7 +43,6 @@ export class AdCodelist {
 
   @Column('timestamp', {
     name: 'timestamp',
-    nullable: false,
     comment: '创建时间',
     default: () => 'CURRENT_TIMESTAMP'
   })

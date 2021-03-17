@@ -1,3 +1,4 @@
+import { EducationModule } from './module/person/education/education.module'
 import { ResumeModule } from './module/person/resume/resume.module'
 import { PersonModule } from './module/person/person.module'
 import { DynamictablesModule } from './module/dynamictables/dynamictables.module'
@@ -47,7 +48,8 @@ import { AdCodelistTypeModule } from './module/ad-codelist-type/ad-codelist-type
     AdCodelistTypeModule,
     FormModule,
     DynamictablesModule,
-    ResumeModule
+    ResumeModule,
+    EducationModule
   ],
   controllers: [AppController],
   providers: [
