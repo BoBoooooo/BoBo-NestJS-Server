@@ -17,7 +17,7 @@ export default {
     host: 'localhost',
     port: 3306,
     username: 'root',
-    password: 'Anshare.cc',
+    password: '',
     database: 'nest',
     charset: 'utf8mb4',
     entities: [join(__dirname, '..', '..', '/entities/*{.ts,.js}')],
