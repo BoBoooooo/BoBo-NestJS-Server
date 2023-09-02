@@ -29,11 +29,10 @@
 
 🚀 轻量级 `NestJS-API` 脚手架,欢迎 Star!
 
-🍌 [配套前端地址](https://github.com/BoBoooooo/Anshare_Vue_Admin.git)
+## Demo
 
-🍉 [swagger地址](http://server.boboooooo.top:7788/api/)
+**域名&服务器已过期...暂时没法访问，抱歉**
 
-🍏 [socket.io测试地址](http://server.boboooooo.top:7788)
 
 ## 1. 开始使用
 
