@@ -1,10 +1,7 @@
 // .eslintrc.js
 module.exports = {
   parser: '@typescript-eslint/parser',
-  extends: [
-    'plugin:@typescript-eslint/recommended',
-    'plugin:prettier/recommended'
-  ],
+  extends: ['plugin:@typescript-eslint/recommended'],
   plugins: ['@typescript-eslint'],
   rules: {
     // 这条规则是为了防止写class interface的member时，分隔符和prettier产生冲突

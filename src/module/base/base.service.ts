@@ -5,8 +5,8 @@
  * @Date: 2020年08月10 10:44:35
  */
 import { Injectable } from '@nestjs/common'
-import { jwtConstants } from 'src/config/constants'
 import * as jwt from 'jsonwebtoken'
+import { jwtConstants } from '../../config/constants'
 
 const guid = require('uuid')
 const dayjs = require('dayjs')
@@ -66,7 +66,7 @@ export abstract class BaseService<T> {
 
     // 此处大坑,如果有更好的方案欢迎PR!
     // 更新的时候去除伪列 (此处由于ts的类型检查不带入运行时,不会自动映射属性,否则数据库没有这个字段会报错)
-    Object.keys(obj).forEach(k => {
+    Object.keys(obj).forEach((k) => {
       // 去除伪列,  伪列格式默认为 表名_字段名   例如保存users表 (dept_name)  详见/users/list方法
       if (k.includes('_')) {
         delete obj[k]
@@ -93,7 +93,10 @@ export abstract class BaseService<T> {
 
   // 查询ById接口
   async findById(id: string) {
-    const result = await this.repository.findOne(id)
+    // ts bug https://github.com/typeorm/typeorm/issues/8939
+    const result = await this.repository.findOneBy({
+      id,
+    } as any)
     return result
   }
 
@@ -114,7 +117,7 @@ export abstract class BaseService<T> {
 
     return {
       list,
-      total
+      total,
     }
   }
 
@@ -140,16 +143,16 @@ export abstract class BaseService<T> {
 
   getSearchCondition(searchCondition: searchType[], qb: SelectQueryBuilder<T>) {
     // 一键搜 查询方式为orlike拼接
-    const orLike = searchCondition.find(item => item.operator === 'orlike')
+    const orLike = searchCondition.find((item) => item.operator === 'orlike')
     if (orLike) {
       const fields = orLike.field.split(',')
-      fields.forEach(field => {
+      fields.forEach((field) => {
         qb.orWhere(`${field} LIKE :value`, { value: `%${orLike.value}%` })
       })
     } else {
       // ...
       qb.where('1 = 1')
-      searchCondition.forEach(obj => {
+      searchCondition.forEach((obj) => {
         const { value, operator, field } = obj
         switch (operator) {
           case 'eq':

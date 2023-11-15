@@ -16,14 +16,12 @@ import * as compression from 'compression'
 import { HttpExceptionFilter } from './filter/http-exception.filter'
 import { join } from 'path'
 
-declare const module: any
-
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
-    cors: true
+    cors: true,
   })
   app.enableCors({
-    origin: true
+    origin: true,
   })
   // helmet安全
   // app.use(helmet());
@@ -51,9 +49,9 @@ async function bootstrap() {
   // 配置静态资源
   app.useStaticAssets(join(__dirname, '../public', '/'), {
     prefix: '/',
-    setHeaders: res => {
+    setHeaders: (res) => {
       res.set('Cache-Control', 'max-age=2592000')
-    }
+    },
   })
 
   await app.listen(process.env.PORT || 7788)

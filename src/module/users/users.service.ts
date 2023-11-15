@@ -2,7 +2,7 @@ import { BaseService } from 'src/module/base/base.service'
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
-import { Users } from 'src/entities/Users'
+import { Users } from '@/entities/Users'
 
 @Injectable()
 export class UsersService extends BaseService<Users> {
@@ -17,8 +17,8 @@ export class UsersService extends BaseService<Users> {
    * @param userName 用户名
    */
   findByUserName(userName: string) {
-    return this.usersRepository.findOne({
-      userName
+    return this.usersRepository.findOneBy({
+      userName,
     })
   }
 
@@ -49,7 +49,7 @@ export class UsersService extends BaseService<Users> {
     const total = await qb.getCount()
     return {
       list,
-      total
+      total,
     }
   }
 }

@@ -2,7 +2,7 @@ import { UploadController } from './upload.controller'
 import { Module } from '@nestjs/common'
 import { UploadService } from './upload.service'
 import { MulterModule } from '@nestjs/platform-express'
-import dayjs = require('dayjs')
+// import dayjs = require('dayjs')
 import { diskStorage } from 'multer'
 const guid = require('uuid')
 const path = require('path')
@@ -20,15 +20,15 @@ const path = require('path')
           return cb(null, filename)
           // 原始文件名
           // return  cb(null, file.originalname);
-        }
+        },
       }),
       limits: {
         fieldSize: 1024 * 1024,
-        fileSize: 1024 * 1024
-      }
-    })
+        fileSize: 1024 * 1024,
+      },
+    }),
   ],
   providers: [UploadService],
-  controllers: [UploadController]
+  controllers: [UploadController],
 })
 export class UploadModule {}

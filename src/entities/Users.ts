@@ -1,8 +1,8 @@
 import { Column, Entity, Index } from 'typeorm'
 
-@Index('index_deptid', ['deptId'], {})
 @Index('index_id', ['id'], {})
 @Index('index_username', ['userName'], {})
+@Index('index_deptid', ['deptId'], {})
 @Entity('users', { schema: 'nest' })
 export class Users {
   @Column('varchar', { primary: true, name: 'id', length: 36 })
@@ -12,7 +12,7 @@ export class Users {
     name: 'userName',
     nullable: true,
     comment: '用户名',
-    length: 50
+    length: 50,
   })
   userName: string | null
 
@@ -26,7 +26,7 @@ export class Users {
     name: 'password',
     nullable: true,
     comment: '密码',
-    length: 50
+    length: 50,
   })
   password: string | null
 
@@ -34,7 +34,7 @@ export class Users {
     name: 'realName',
     nullable: true,
     comment: '真实姓名',
-    length: 20
+    length: 20,
   })
   realName: string | null
 
@@ -42,7 +42,7 @@ export class Users {
     name: 'rank',
     nullable: true,
     comment: '排序码',
-    default: () => "'0'"
+    default: () => "'0'",
   })
   rank: number | null
 
@@ -52,7 +52,7 @@ export class Users {
   @Column('timestamp', {
     name: 'timestamp',
     comment: '创建时间',
-    default: () => 'CURRENT_TIMESTAMP'
+    default: () => 'CURRENT_TIMESTAMP',
   })
   timestamp: Date
 }

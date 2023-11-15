@@ -37,14 +37,15 @@
 ## 1. 开始使用
 
 * git clone https://github.com/BoBoooooo/NestJS-API-Server.git
-* npm install
+* yarn
 * 配置mysql数据库
   * 新建数据库 `nest`
   * 导入 `nest.sql`
   * 修改以下相关数据库配置
     * `package.json->scripts->db`
     * `/src/config/env/*`
-* npm start
+* yarn start
+* yarn db
 
 ## 2.目录结构
 
@@ -118,7 +119,7 @@ select * from users where userName like '%ce%' and userName like '%shi%' order b
 
 - 文件上传,静态资源服务
 
-- 一键生成数据库模型 `npm run db`  (typeorm-model-generator)
+- 一键生成数据库模型 `yarn db`  (typeorm-model-generator)
 ## 4. 部署
 
 ``` javascript

@@ -2,12 +2,12 @@ import { ResultGenerator } from './../../core/resultBean'
 import { FormService } from './form.service'
 import { Controller, Post, Query } from '@nestjs/common'
 import { ApiHeader } from '@nestjs/swagger'
-import { Form } from 'src/entities/Form'
+import { Form } from '@/entities/Form'
 import { BaseController } from 'src/module/base/base.controller'
 
 @ApiHeader({
   name: '表单管理',
-  description: '表单管理'
+  description: '表单管理',
 })
 @Controller('form')
 export class FormController extends BaseController<Form> {
@@ -19,8 +19,8 @@ export class FormController extends BaseController<Form> {
   async getFormJson(@Query() query) {
     const form = await this.formService.repository.findOne({
       where: {
-        tableName: query.tablename
-      }
+        tableName: query.tablename,
+      },
     })
     return ResultGenerator.success(form)
   }
@@ -31,7 +31,7 @@ export class FormController extends BaseController<Form> {
   @Post('getTables')
   async getTables() {
     const tables = await this.formService.repository.query(
-      'select table_name from information_schema.TABLES where TABLE_SCHEMA="nest"'
+      'select table_name from information_schema.TABLES where TABLE_SCHEMA="nest"',
     )
     return ResultGenerator.success(tables)
   }

@@ -10,34 +10,34 @@ import {
   Query,
   Req,
   UploadedFile,
-  UseInterceptors
+  UseInterceptors,
 } from '@nestjs/common'
 import { ApiHeader } from '@nestjs/swagger'
 import { BaseController } from '../base/base.controller'
-import { Users } from 'src/entities/Users'
+import { Users } from '@/entities/Users'
 import { ResultGenerator } from 'src/core/resultBean'
 import { FileInterceptor } from '@nestjs/platform-express'
 
 @ApiHeader({
   name: 'users Module',
-  description: '用户设置'
+  description: '用户设置',
 })
 @Controller('users')
 export class UsersController extends BaseController<Users> {
   constructor(
     private usersService: UsersService,
     private readonly authService: AuthService,
-    private readonly eventsGateway: EventsGateway
+    private readonly eventsGateway: EventsGateway,
   ) {
     super(usersService)
   }
 
   @NoAuth()
   @Post('login')
-  async login(@Body() loginParmas: any) {
+  async login(@Body() loginParmas: { username: string, password: string }) {
     const authResult = await this.authService.validateUser(
       loginParmas.username,
-      loginParmas.password
+      loginParmas.password,
     )
     switch (authResult.code) {
       case 200:
@@ -57,7 +57,7 @@ export class UsersController extends BaseController<Users> {
   async userInfo(@Req() req) {
     // decoded token 信息
     const user = this.usersService.getUserInfoFromToken(
-      req.headers.authorization
+      req.headers.authorization,
     )
     return ResultGenerator.success(user)
   }

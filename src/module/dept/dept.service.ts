@@ -2,7 +2,7 @@ import { BaseService } from 'src/module/base/base.service'
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
-import { Dept } from 'src/entities/Dept'
+import { Dept } from '@/entities/Dept'
 
 @Injectable()
 export class DeptService extends BaseService<Dept> {

@@ -2,11 +2,11 @@ import { EducationService } from './education.service'
 import { Controller } from '@nestjs/common'
 import { ApiHeader } from '@nestjs/swagger'
 import { BaseController } from '../../base/base.controller'
-import { PersonEducation } from 'src/entities/PersonEducation'
+import { PersonEducation } from '@/entities/PersonEducation'
 
 @ApiHeader({
   name: 'Education Module',
-  description: '教育经历模块'
+  description: '教育经历模块',
 })
 @Controller('Education')
 export class EducationController extends BaseController<PersonEducation> {
